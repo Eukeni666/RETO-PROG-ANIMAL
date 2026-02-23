@@ -11,9 +11,14 @@ import java.time.LocalDate;
  * @author s.ortega
  */
 public class Empleado {
+    
+    // añadir los filtros que se deseen
+    public enum Filtro {ESPECIE, FECHA_ALTA;}
+    private Filtro filtro;
+
     private LocalDate alta;
     private float salario;
-
+    
     public Empleado(LocalDate alta, float salario) {
         this.alta = alta;
         this.salario = salario;
@@ -33,6 +38,10 @@ public class Empleado {
 
     public float getSalario() {
         return salario;
+    }
+    
+    public Filtro getFiltro (){
+        return filtro;
     }
     
     private void listarAnimales(Animal[] animal, Filtro filtro, String text)
