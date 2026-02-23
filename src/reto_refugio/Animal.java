@@ -16,8 +16,7 @@ public class Animal {
     static final int MAX_RACIONES = 1000; 
     
     static int racionesDisponibles = MAX_RACIONES;
-    
-    
+        
     private String especie;
     private LocalDate fechaAlta;
     private LocalDate fechaBaja; // adopción o muerte
@@ -33,6 +32,7 @@ public class Animal {
     private Cuidador cuidador;
     private String [] revisiones;
     private int contadorRevisiones;
+    private String nombre;
     
     public Animal (){
         
@@ -53,6 +53,8 @@ public class Animal {
         cuidador = null;
         revisiones = new String [MAX_REVISIONES];
         contadorRevisiones = 0;
+        RETO_REFUGIO.animales [RETO_REFUGIO.contadorAnimales] = this;
+        RETO_REFUGIO.contadorAnimales ++;
     }
 
     /* GETTERS */
@@ -95,6 +97,10 @@ public class Animal {
     public int getRacionesDisponibles (){
         return racionesDisponibles;
     }
+    
+    public String getNombre (){
+        return nombre;
+    }
 
     /* SETTERS */
     public void setEspecie(String especie) {
@@ -134,6 +140,9 @@ public class Animal {
     public void setCuidador(Cuidador cuidador) {
         this.cuidador = cuidador;
     }
+    public void setNombre (String nombre){
+        this.nombre = nombre;
+    }
     
     /**
      * Al comprar comida se incrementan las raciones disponibles en el valor
@@ -172,7 +181,7 @@ public class Animal {
     
     @Override
     public String toString (){
-        String txt = "\n ESPECIE: "+ especie.toUpperCase() + ""
+        String txt = "\nESPECIE: "+ especie.toUpperCase() + ""
                 + "\t FECHA DE ALTA: " + fechaAlta +
                 "\nSEXO: ";
         if (sexo){
@@ -183,7 +192,7 @@ public class Animal {
         txt += "\t SALUD: " + salud + ""
                 + "\t HIGIENE: " + higiene +
 //                "\n CUIDADOR " + cuidador.getNombre () +
-                "\n REVISIONES: ";
+                "\nREVISIONES: ";
         
         if (contadorRevisiones == 0){
             txt += "NO";

@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package reto_refugio;
+
+import java.time.LocalDate;
 
 /**
  *
@@ -10,4 +8,8 @@ package reto_refugio;
  */
 public class Perro extends Mamifero {
     private String tamanno; // P, M, G (pequeño, mediano, grande)
+    
+    public Perro (LocalDate fechaAlta, boolean sexo) {
+        super ("perro", fechaAlta, sexo);
+    }
 }
