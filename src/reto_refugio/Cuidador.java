@@ -4,6 +4,8 @@
  */
 package reto_refugio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author s.ortega
@@ -11,7 +13,7 @@ package reto_refugio;
 public class Cuidador extends Empleado{
     private Animal[] animales;
 
-    public Cuidador(Animal[] animales, Object alta, float salario) {
+    public Cuidador(Animal[] animales, LocalDate alta, float salario) {
         super(alta, salario);
         this.animales = animales;
     }
