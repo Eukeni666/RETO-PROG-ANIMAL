@@ -38,6 +38,7 @@ public class Animal {
         
     }
     
+    // ¿inicializar atributos con null?
     public Animal (String especie, LocalDate fechaAlta, boolean sexo){
         this.especie = especie;
         this.fechaAlta = fechaAlta;
@@ -49,7 +50,7 @@ public class Animal {
         salud = rand.nextInt(1, 11);
         higiene = rand.nextInt(11);
         this.sexo = sexo;
-        cuidador = "No asignado";
+        cuidador = null;
         revisiones = new String [MAX_REVISIONES];
         contadorRevisiones = 0;
     }
@@ -102,48 +103,41 @@ public class Animal {
 //    public void setFechaAlta(LocalDate fechaAlta) {
 //        this.fechaAlta = fechaAlta;
 //    }
-
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
-
     public void setPersonalidad(String personalidad) {
         this.personalidad = personalidad;
     }
-
     public void setEspacio(String espacio) {
         this.espacio = espacio;
     }
-
     public void setAlimentacionTipo(String alimentacionTipo) {
         this.alimentacionTipo = alimentacionTipo;
     }
-
     public void setAlimentacionPeriodicidad(String alimentacionPeriodicidad) {
         this.alimentacionPeriodicidad = alimentacionPeriodicidad;
     }
-
-    /* método curar () llamaría a este. Es += en lugar de un setter real*/
+    /* el método curar () llamaría a este para INCREMENTAR el valor de salud. 
+    O sea, es += en lugar de un setter real*/
     public void setSalud(int salud) {
         this.salud += salud;
     }
-
     /* el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
-    por parámetro el valor */
+    por parámetro el valor (NO se incrementa, ES el valor)*/
     public void setHigiene(int higiene) {
         this.higiene = higiene;
     }
-
     public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
-
     public void setCuidador(Cuidador cuidador) {
         this.cuidador = cuidador;
     }
     
     /**
-     * Al comprar comida se incrementan las raciones disponibles
+     * Al comprar comida se incrementan las raciones disponibles en el valor
+     * del parámetro
      * @param: cantidad de raciones que se compran
      */
     public void setRacionesDisponibles (int i){
@@ -183,7 +177,7 @@ public class Animal {
         }
         txt += "\t SALUD: " + salud + ""
                 + "\t HIGIENE: " + higiene +
-                "\n CUIDADOR " + cuidador.getNombre () +
+//                "\n CUIDADOR " + cuidador.getNombre () +
                 "\n REVISIONES: ";
         
         if (contadorRevisiones == 0){
