@@ -165,6 +165,11 @@ public class Animal {
         // ¿? hay una plaza más
     }
     
+    public void printProvisional (){
+        System.out.println(especie + ". Fecha altqa: " + fechaAlta + ". Salud: " + salud +
+                racionesDisponibles);
+    }
+    
     @Override
     public String toString (){
         String txt = "\n ESPECIE: "+ especie.toUpperCase() + ""
