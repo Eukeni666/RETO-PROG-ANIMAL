@@ -4,13 +4,15 @@
  */
 package reto_refugio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author s.ortega
  */
 public class Estilista extends Empleado{
     
-    public Estilista(Object alta, float salario) {
+    public Estilista(LocalDate alta, float salario) {
         super(alta, salario);
     }
     
