@@ -4,6 +4,8 @@
  */
 package reto_refugio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author s.ortega
@@ -11,7 +13,7 @@ package reto_refugio;
 public class Administrativo extends Empleado{
     private Adoptante[] adoptantes;
 
-    public Administrativo(Adoptante[] adoptantes, Object alta, float salario) {
+    public Administrativo(Adoptante[] adoptantes, LocalDate alta, float salario) {
         super(alta, salario);
         this.adoptantes = adoptantes;
     }
