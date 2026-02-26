@@ -9,25 +9,27 @@ import java.util.Scanner;
  */
 public class RETO_REFUGIO {
     
-    private static LocalDate fecha;
-    static final int MAX_ANIMALES = 60;
+    static Scanner scan = new Scanner (System.in);
+    static LocalDate fecha;
+    private static final int MAX_ANIMALES = 60;
     
     /* Array donde se incluyen todos los animales al crearlos */
-    static Animal [] animales = new Animal [MAX_ANIMALES];
-    static int contadorAnimales;
+    private static Animal [] animales = new Animal [MAX_ANIMALES];
+    private static int contadorAnimales;
 
-    static Scanner scan;
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         /* Método para hacer pruebas */
-        inicioAnimal ();
+        //inicioAnimal ();
         
-        int opc = scan.nextInt();
-        
+        /**
+         * *****************************************
+         * ************ MENÚ PRINCIPAL *************
+         * *****************************************
+         */
+        System.out.println("*******************");
         System.out.println("REFUGIO DE ANIMALES");
+        System.out.println("*******************");
         System.out.println("MENÚ PRINCIPAL");
         System.out.println("Seleccione opción:");
         System.out.println("(1) Gestión de ANIMALES");
@@ -35,9 +37,10 @@ public class RETO_REFUGIO {
         System.out.println("(3) Gestión de ADOPCIONES");
         System.out.println("(4) Gestión de EMPLEADOS");
         
+        int opc = scan.nextInt();        
         switch(opc){
             case 1: 
-                System.out.println("MENÚ DE GESTIÓN DE ANIMALES");
+                System.out.println("[1] MENÚ DE GESTIÓN DE ANIMALES");
                 System.out.println("(1) Dar de alta");
                 System.out.println("(2) Dar de baja");
                 System.out.println("(3) Mostrar estado");
@@ -47,38 +50,81 @@ public class RETO_REFUGIO {
                 
                 opc = scan.nextInt();
                 switch (opc) {
-                    case 1: 
+                    case 1: System.out.println("ALTA DE ANIMAL."
+                            + "\nIntroducir datos.");
                         break;
-                    case 2: 
+                    case 2: System.out.println("BAJA DE ANIMAL.");
                         break;
-                    case 3: 
+                    case 3: System.out.println("MOSTRAR ESTADO DE ANIMAL");
                         break;
-                    case 4: 
+                    case 4: System.out.println("ENTREGAR EN ADOPCIÓN");
                         break;
-                    case 5: 
+                    case 5: System.out.println("ASIGNAR CUIDADOR");
                         break;
-                    case 6: 
+                    case 6: System.out.println("REVISIÓN MÉDICA");
                         break;
                 }
                 
                 break;
-            case 2: System.out.println("MENÚ DE GESTIÓN DIARIA");
+                
+            case 2: System.out.println("[2] MENÚ DE GESTIÓN DIARIA");
                 System.out.println("(1) Comprobar estado de animales");
                 System.out.println("(2) Alimentar animales");
-                System.out.println("(3) Limpiar");
-                System.out.println("(4) Documentar");
+                System.out.println("(3) Limpiar animales y espacios");
+                System.out.println("(4) Documentar actividad");
                 System.out.println("(5) Revisar comida disponible");
+                
+                opc = scan.nextInt();
+                switch (opc) {
+                    case 1: System.out.println("ESTADO DE LOS ANIMALES");
+                        break;
+                    case 2: System.out.println("ALIMENTAR ANIMALES");
+                        break;
+                    case 3: System.out.println("LIMPIAR ANIMALES Y ESPACIOS");
+                        break;
+                    case 4: System.out.println("DOCUMENTAR ACTIVIDAD");
+                        break;
+                    case 5: System.out.println("REVISAR COMIDA DISPONIBLE");
+                        break;
+                }
+                
                 break;
-            case 3: System.out.println("MENÚ DE GESTIÓN DE ADOPCIONES");
+                
+            case 3: System.out.println("[3] MENÚ DE GESTIÓN DE ADOPCIONES");
                 System.out.println("(1) Revisar solicitud");
                 System.out.println("(2) Hacer seguimiento de adopción");
+                
+                opc = scan.nextInt();
+                switch (opc) {
+                    case 1: System.out.println("REVISAR SOLICITUD DE ADOPCIÓN");
+                        break;
+                    case 2: System.out.println("SEGUIMIENTO DE ADOPCIÓN");
+                        break;
+                }
+                
                 break;
-            case 4: System.out.println("MENÚ DE GESTIÓN DE EMPLEADOS");
+                
+            case 4: System.out.println("[4] MENÚ DE GESTIÓN DE EMPLEADOS");
                 System.out.println("(1) Dar de alta");
                 System.out.println("(2) Dar de baja");
                 System.out.println("(3) Aumentar salario");
                 System.out.println("(4) Asignar horario");
+                
+                opc = scan.nextInt();
+                switch (opc) {
+                    case 1: System.out.println("ALTA DE EMPLEADO"
+                            + "\n");
+                        break;
+                    case 2: System.out.println("BAJA DE EMPLEADO");
+                        break;
+                    case 3: System.out.println("AUMENTAR SALARIO");
+                        break;
+                    case 4: System.out.println("ASIGNAR HORARIO");
+                        break;
+                }
+                
                 break;
+                
         }
         
     }
