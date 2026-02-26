@@ -39,7 +39,7 @@ public class RETO_REFUGIO {
             System.out.println("");
             System.out.println("ANIMAL " + (i+1) + ":"
                     + "\nESPECIE: " + animales [i].getEspecie() +
-                    "\nFECHA DE ALTA:" + animales [i].getFechaAlta());
+                    "\nFECHA DE ALTA: " + animales [i].getFechaAlta());
         }
     }
     
