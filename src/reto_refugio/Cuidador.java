@@ -42,6 +42,11 @@ public class Cuidador extends Empleado{
         animales[cual].setSalud(10);
     }
     
+    public void curar(int cual)
+    {
+        animales[cual].setSalud(2);
+    }
+    
     public void cuidar(int cual)
     {
         //¿Que es cuidar para nosostros?
