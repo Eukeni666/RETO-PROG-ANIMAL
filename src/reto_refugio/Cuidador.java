@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class Cuidador extends Empleado{
     private Animal[] animales;
 
-    public Cuidador(Animal[] animales, LocalDate alta, float salario) {
-        super(alta, salario);
+    public Cuidador(Animal[] animales, String nombre, String apellidos, LocalDate alta, float salario) {
+        super(nombre, apellidos, alta, salario);
         this.animales = animales;
     }
 
