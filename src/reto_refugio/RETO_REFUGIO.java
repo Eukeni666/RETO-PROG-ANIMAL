@@ -50,8 +50,7 @@ public class RETO_REFUGIO {
                 
                 opc = scan.nextInt();
                 switch (opc) {
-                    case 1: System.out.println("ALTA DE ANIMAL."
-                            + "\nIntroducir datos.");
+                    case 1: System.out.println("ALTA DE ANIMAL.");
                         break;
                     case 2: System.out.println("BAJA DE ANIMAL.");
                         break;
@@ -146,5 +145,15 @@ public class RETO_REFUGIO {
                     + "\nESPECIE: " + animales [i].getEspecie() +
                     "\nFECHA DE ALTA: " + animales [i].getFechaAlta());
         }
+    }
+    
+    public static int opc (int i){
+        int opc = scan.nextInt();
+        while (opc < 1 || opc > i){
+            System.out.println("Opción no válida."
+                    + "\nIntroduzca un número entre 1 y " + i);
+            opc = scan.nextInt();
+        }
+        return opc;
     }
 }
