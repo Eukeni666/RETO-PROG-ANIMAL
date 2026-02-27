@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author s.ortega
  */
-public class Empleado {
+public class Empleado extends Persona{
     
     // añadir los filtros que se deseen
     public enum Filtro {ESPECIE, FECHA_ALTA;}
@@ -18,10 +18,14 @@ public class Empleado {
 
     private LocalDate alta;
     private float salario;
+    protected boolean vigente;
+    protected String horario;
     
-    public Empleado(LocalDate alta, float salario) {
+    public Empleado(String nombre, String apellidos, LocalDate alta, float salario) {
+        super(nombre, apellidos);
         this.alta = alta;
         this.salario = salario;
+        this.vigente = true;
     }
 
     public void setAlta(LocalDate alta) {
