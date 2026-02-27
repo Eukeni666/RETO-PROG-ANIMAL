@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class Estilista extends Empleado{
     
-    public Estilista(LocalDate alta, float salario) {
-        super(alta, salario);
+    public Estilista(LocalDate alta, String nombre, String apellidos, float salario) {
+        super(nombre, apellidos, alta, salario);
     }
     
     public void tratar(Animal animal)
