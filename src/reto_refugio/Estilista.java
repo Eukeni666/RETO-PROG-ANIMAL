@@ -16,8 +16,8 @@ public class Estilista extends Empleado{
         super(nombre, apellidos, alta, salario);
     }
     
-    public void tratar(Animal animal)
+    public void tratar(Mamifero mami)
     {
-        //falta que el animal puedad ser tratado
+        mami.setPresentable(true);
     }
 }
