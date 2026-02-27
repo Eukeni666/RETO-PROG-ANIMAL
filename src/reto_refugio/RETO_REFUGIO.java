@@ -37,7 +37,7 @@ public class RETO_REFUGIO {
         System.out.println("(3) Gestión de ADOPCIONES");
         System.out.println("(4) Gestión de EMPLEADOS");
         
-        int opc = scan.nextInt();        
+        int opc = opc (4);        
         switch(opc){
             case 1: 
                 System.out.println("[1] MENÚ DE GESTIÓN DE ANIMALES");
@@ -48,7 +48,7 @@ public class RETO_REFUGIO {
                 System.out.println("(5) Asignar cuidador");
                 System.out.println("(6) Revisión médica");
                 
-                opc = scan.nextInt();
+                opc (6);
                 switch (opc) {
                     case 1: System.out.println("ALTA DE ANIMAL.");
                         break;
@@ -63,7 +63,6 @@ public class RETO_REFUGIO {
                     case 6: System.out.println("REVISIÓN MÉDICA");
                         break;
                 }
-                
                 break;
                 
             case 2: System.out.println("[2] MENÚ DE GESTIÓN DIARIA");
@@ -73,7 +72,7 @@ public class RETO_REFUGIO {
                 System.out.println("(4) Documentar actividad");
                 System.out.println("(5) Revisar comida disponible");
                 
-                opc = scan.nextInt();
+                opc (5);
                 switch (opc) {
                     case 1: System.out.println("ESTADO DE LOS ANIMALES");
                         break;
@@ -93,7 +92,7 @@ public class RETO_REFUGIO {
                 System.out.println("(1) Revisar solicitud");
                 System.out.println("(2) Hacer seguimiento de adopción");
                 
-                opc = scan.nextInt();
+                opc (2);
                 switch (opc) {
                     case 1: System.out.println("REVISAR SOLICITUD DE ADOPCIÓN");
                         break;
@@ -109,7 +108,7 @@ public class RETO_REFUGIO {
                 System.out.println("(3) Aumentar salario");
                 System.out.println("(4) Asignar horario");
                 
-                opc = scan.nextInt();
+                opc (4);
                 switch (opc) {
                     case 1: System.out.println("ALTA DE EMPLEADO"
                             + "\n");
