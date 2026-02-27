@@ -51,6 +51,7 @@ public class RETO_REFUGIO {
                 opc (6);
                 switch (opc) {
                     case 1: System.out.println("ALTA DE ANIMAL.");
+                        altaAnimal ();
                         break;
                     case 2: System.out.println("BAJA DE ANIMAL.");
                         break;
@@ -155,4 +156,52 @@ public class RETO_REFUGIO {
         }
         return opc;
     }
+    
+    public static void altaAnimal (){
+        System.out.println("Especie: "
+                + "\n(1) Perro"
+                + "\n(2) Gato"
+                + "\n(3) Otro mamífero"
+                + "\n(4) Ave"
+                + "\n(5) Reptil");
+        int opc = opc (5);
+        
+        boolean sexo = sexo ();
+        
+        switch (opc){
+            case 1: new Perro (fecha.now(), sexo);
+                break;
+            case 2: new Mamifero ("gato", fecha.now(), sexo);
+                break;
+            case 3: String especie = especie ();
+                new Mamifero (especie, fecha.now(), sexo);
+                break;
+            case 4: 
+                break;
+            case 5: 
+                break;
+        }
+        
+        
+    }
+    
+    public static boolean sexo () {
+        System.out.println("Sexo: (1) Macho (2) Hembra");
+        int i = opc (2);
+        if (i == 1){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
+    public static String especie (){
+        System.out.println("Introducir especie: ");
+        String especie = scan.nextLine ();
+        return especie;
+    }
+    
+    
+    
 }

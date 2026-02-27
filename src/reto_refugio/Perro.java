@@ -12,4 +12,12 @@ public class Perro extends Mamifero {
     public Perro (LocalDate fechaAlta, boolean sexo) {
         super ("perro", fechaAlta, sexo);
     }
+    
+    public String getTamanno (){
+        return tamanno;
+    }
+    
+    public void setTamanno (String s){
+        tamanno = s;
+    }
 }

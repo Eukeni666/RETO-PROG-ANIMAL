@@ -24,9 +24,7 @@ public class Animal {
     private String espacio; // ¿debería ser int? ¿cuál es su función?
     private String alimentacionTipo;
     private String alimentacionPeriodicidad;
-    // private boolean salud;
     private int salud; // de 1 a 10, 0 muerte
-    // private boolean higiene
     private int higiene; // de 0 a 10, el cuidador lo pone al valor que sea al limpiar ()
     private boolean sexo; // 0 hembra, 1 macho
     private Cuidador cuidador;
@@ -34,10 +32,7 @@ public class Animal {
     private int contadorRevisiones;
     private String nombre;
     
-    public Animal (){
-        
-    }
-    
+   
     // ¿inicializar atributos con null?
     public Animal (String especie, LocalDate fechaAlta, boolean sexo){
         this.especie = especie;
