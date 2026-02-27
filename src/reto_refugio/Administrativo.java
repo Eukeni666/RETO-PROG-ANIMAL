@@ -12,14 +12,18 @@ import java.time.LocalDate;
  */
 public class Administrativo extends Empleado{
     private Adoptante[] adoptantes;
+    private String[] reportes;
+    int num;
 
     public Administrativo(Adoptante[] adoptantes, String nombre, String apellido, LocalDate alta, float salario) {
         super(nombre, apellido, alta, salario);
         this.adoptantes = adoptantes;
+        this.reportes = new String[1000];
+        num = 0;
     }
     
-    public void anotar()
+    public void addReporte(String reporte)
     {
-        //Especificar metodo
+        reportes[num++] = reporte;
     }
 }
