@@ -11,16 +11,16 @@ public class RETO_REFUGIO {
     
     static Scanner scan = new Scanner (System.in);
     static LocalDate fecha;
-    private static final int MAX_ANIMALES = 60;
+    static final int MAX_ANIMALES = 60;
     
     /* Array donde se incluyen todos los animales al crearlos */
-    private static Animal [] animales = new Animal [MAX_ANIMALES];
-    private static int contadorAnimales;
+    static Animal [] animales = new Animal [MAX_ANIMALES];
+    static int contadorAnimales;
 
     
     public static void main(String[] args) {
         /* Método para hacer pruebas */
-        //inicioAnimal ();
+        inicioAnimal ();
         
         /**
          * *****************************************
