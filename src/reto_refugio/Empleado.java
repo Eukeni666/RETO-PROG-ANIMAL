@@ -50,7 +50,29 @@ public class Empleado extends Persona{
     
     private void listarAnimales(Animal[] animal, Filtro filtro, String text)
     {
-        //hacer aqui el metodo
+        if(filtro.equals("ESPECIE"))
+        {
+            int length = animal.length;
+            int num = 0;
+            for(int i = 0; i < length; i++)
+            {
+                if(animal[i].getEspecie() == text)
+                {
+                    System.out.println(++num + "º animal compatible:");
+                    System.out.print("Nombre: " + animal[i].getNombre());
+                    if(animal[i].isSexo())
+                        System.out.println("(Macho)");
+                    else
+                        System.out.println("(Hembra)");
+                    System.out.println("Personalidad: " + animal[i].getPersonalidad());
+                    System.out.println("Alimentación: " + animal[i].getAlimentacionTipo() + " cada " + animal[i].getAlimentacionPeriodicidad());
+                }
+            }
+        }
+        else
+        {
+            //
+        }
     }
     
     private void listarAnimales(Animal[] animal, Filtro filtro, boolean depende)
