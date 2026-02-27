@@ -62,8 +62,8 @@ public class Cuidador extends Empleado{
         return animales[cual];
     }
     
-    public void documentar()
+    public void documentar(Administrativo admin, String reporte)
     {
-        //¿Como exactamente se desea?
+        admin.addReporte(reporte);
     }
 }
