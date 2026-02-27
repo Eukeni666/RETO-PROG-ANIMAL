@@ -12,4 +12,12 @@ public class Mamifero extends Animal {
     public Mamifero (String especie, LocalDate fechaAlta, boolean sexo){
         super (especie, fechaAlta, sexo);
     }
+    
+    public boolean isPresentable (){
+        return this.presentable;
+    }
+    
+    public void setPresentable (boolean b){
+        presentable = b;
+    }
 }
