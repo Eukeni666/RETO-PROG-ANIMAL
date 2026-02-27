@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class Administrativo extends Empleado{
     private Adoptante[] adoptantes;
 
-    public Administrativo(Adoptante[] adoptantes, LocalDate alta, float salario) {
-        super(alta, salario);
+    public Administrativo(Adoptante[] adoptantes, String nombre, String apellido, LocalDate alta, float salario) {
+        super(nombre, apellido, alta, salario);
         this.adoptantes = adoptantes;
     }
     
