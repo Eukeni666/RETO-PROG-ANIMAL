@@ -5,40 +5,38 @@
 package reto_refugio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author s.ortega
  */
 public class Administrativo extends Empleado{
-    private Adoptante[] adoptantes;
-    private String[] reportes;
+    private ArrayList<Adoptante> adoptantes;
+    private ArrayList<String> reportes;
     private int num;
     private int amount;
 
-    public Administrativo(Adoptante[] adoptantes, String nombre, String apellido, LocalDate alta, float salario) {
+    public Administrativo(String nombre, String apellido, LocalDate alta, float salario) {
         super(nombre, apellido, alta, salario);
-        this.adoptantes = adoptantes;
-        this.reportes = new String[1000];
+        this.adoptantes = new ArrayList<Adoptante>();
+        this.reportes = new ArrayList<String>();
         num = 0;
         amount = 0;
     }
     
     public void addReporte(String reporte)
     {
-        if(reportes.length > num)
-            reportes[num++] = reporte;
+        reportes.add(reporte);
     }
     
     public void registrar(Adoptante ado)
     {
-        if(amount >= adoptantes.length)
-            return;
-        for(int i = 0; i < amount; i++)
+        for(Adoptante a:adoptantes)
         {
-            if(adoptantes[i].getNombre().equalsIgnoreCase(ado.getNombre()))
+            if(a.getNombre().equalsIgnoreCase(ado.getNombre()))
                 return;
         }
-        adoptantes[amount++] = ado;
+        adoptantes.add(ado);
     }
 }

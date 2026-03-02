@@ -5,24 +5,25 @@
 package reto_refugio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author s.ortega
  */
 public class Gerente extends Cuidador{
-    private Animal[] animalesTot;
+    private ArrayList<Animal> animalesTot;
 
-    public Gerente(Animal[] animalesTot, Animal[] animales, String nombre, String apellidos, LocalDate alta, float salario) {
+    public Gerente(ArrayList<Animal> animalesTot, ArrayList<Animal> animales, String nombre, String apellidos, LocalDate alta, float salario) {
         super(animales, nombre, apellidos, alta, salario);
         this.animalesTot = animalesTot;
     }
 
-    public Animal[] getAnimalesTot() {
+    public ArrayList<Animal> getAnimalesTot() {
         return animalesTot;
     }
 
-    public void setAnimalesTot(Animal[] animalesTot) {
+    public void setAnimalesTot(ArrayList<Animal> animalesTot) {
         this.animalesTot = animalesTot;
     }
     
@@ -34,11 +35,8 @@ public class Gerente extends Cuidador{
     
     public void asignaAnimal(int animal, Cuidador cuidador)
     {
-        animalesTot[animal].setCuidador(cuidador);
-        Animal[] nuevos = new Animal[cuidador.getAnimales().length + 1];
-        System.arraycopy(cuidador.getAnimales(), 0, nuevos, 0, nuevos.length);
-        nuevos[nuevos.length - 1] = animalesTot[animal];
-        cuidador.setAnimales(nuevos);
+        animalesTot.get(animal).setCuidador(cuidador);
+        cuidador.setAnimales(animalesTot.get(animal));
     }
     
     public Empleado contratar(Persona pers, LocalDate alta, float salario)
