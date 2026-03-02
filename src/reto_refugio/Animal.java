@@ -14,7 +14,7 @@ public class Animal {
     static Random rand = new Random ();
     
     static final int MAX_RACIONES = 1000; // capacidad de almacenamieento
-    static int racionesDisponibles = MAX_RACIONES/2; // el almacén está por la mitad
+    static int racionesDisponibles = 40/2; // el almacén está por la mitad
         
     /* Sirve para inicializar el campo id, y sigue aumentando aunque haya
     bajas de animales, de tal manera que ninguna id se repite */
@@ -95,7 +95,7 @@ public class Animal {
     public ArrayList <String> getRevisiones() {
         return revisiones;
     }
-    public int getRacionesDisponibles (){
+    public static int getRacionesDisponibles (){
         return racionesDisponibles;
     }
     
@@ -153,7 +153,7 @@ public class Animal {
      * del parámetro
      * @param: cantidad de raciones que se compran
      */
-    public void setRacionesDisponibles (int i){
+    public static void comprarComida (int i){
         racionesDisponibles += i;
     }
     
@@ -163,9 +163,15 @@ public class Animal {
 
     /* OTROS MÉTODOS */
     /* Comer afecta a la higiene */
-    public void comer (){
-        racionesDisponibles --;
-        higiene --;
+    public void comer() {
+        boolean hay = racionesDisponibles > 0;
+        if (hay) {
+            racionesDisponibles--;
+            higiene--;
+        } else {
+            System.out.println("No hay comida");
+            salud --;
+        }
     }
     
     public void enfermar () {
@@ -178,7 +184,7 @@ public class Animal {
     }
     
     public void printProvisional (){
-        System.out.println(especie + ". Fecha altqa: " + fechaAlta + ". Salud: " + salud +
+        System.out.println(especie + ". Fecha alta: " + fechaAlta + ". Salud: " + salud +
                 racionesDisponibles);
     }
     

@@ -24,6 +24,11 @@ public class RETO_REFUGIO {
         
         boolean salir = false;
         do {
+            /* Declaración de variables que se utilizan en los menús */
+            int opc;
+            int id;
+            Animal animal;
+            
             /**
              * *****************************************
              * ************ MENÚ PRINCIPAL *************
@@ -39,7 +44,7 @@ public class RETO_REFUGIO {
             System.out.println("(3) Gestión de ADOPCIONES");
             System.out.println("(4) Gestión de EMPLEADOS");
 
-            int opc = opc(4);
+            opc = opc(4);
             switch (opc) {
                 case 1:
                     System.out.println("[1] MENÚ DE GESTIÓN DE ANIMALES");
@@ -49,8 +54,9 @@ public class RETO_REFUGIO {
                     System.out.println("(4) Dar animal en adopción");
                     System.out.println("(5) Asignar cuidador");
                     System.out.println("(6) Revisión médica");
+                    System.out.println("(7) Mostrar historial médico");
 
-                    opc(6);
+                    opc = opc(7);
                     switch (opc) {
                         case 1:
                             System.out.println("ALTA DE ANIMAL.");
@@ -58,20 +64,35 @@ public class RETO_REFUGIO {
                             break;
                         case 2:
                             System.out.println("BAJA DE ANIMAL.");
-                            animales.remove(getIdAnimal());
+                            id = getIdAnimal();
+                            bajaAnimal (id);
                             break;
                         case 3:
                             System.out.println("MOSTRAR ESTADO DE ANIMAL");
-                            System.out.println(animales.get(getIdAnimal()));
+                            id = getIdAnimal();
+                            System.out.println(animales.get(id));
                             break;
-                        case 4:
+                        case 4: // INCOMPLETO
                             System.out.println("ENTREGAR EN ADOPCIÓN");
+                            id = getIdAnimal();
+                            animal = animales.get(id);
+                            // ENTREGAR EN ADOPCIÓN
                             break;
-                        case 5:
+                        case 5: // INCOMPLETO
                             System.out.println("ASIGNAR CUIDADOR");
+                            id = getIdAnimal();
+                            animal = animales.get(id);
+                            // ASIGNAR EL CUIDADOR
                             break;
                         case 6:
                             System.out.println("REVISIÓN MÉDICA");
+                            id = getIdAnimal();
+                            revisionMedica (id);
+                            break;
+                        case 7:
+                            System.out.println("MOSTRAR HISTORIAL MÉDICO");
+                            id = getIdAnimal();
+                            mostrarHistorial (id);
                             break;
                     }
                     break;
@@ -84,13 +105,15 @@ public class RETO_REFUGIO {
                     System.out.println("(4) Documentar actividad");
                     System.out.println("(5) Revisar comida disponible");
 
-                    opc(5);
+                    opc = opc(5);
                     switch (opc) {
                         case 1:
                             System.out.println("ESTADO DE LOS ANIMALES");
+                            estadoAnimales ();
                             break;
                         case 2:
                             System.out.println("ALIMENTAR ANIMALES");
+                            alimentarAnimales ();
                             break;
                         case 3:
                             System.out.println("LIMPIAR ANIMALES Y ESPACIOS");
@@ -100,9 +123,9 @@ public class RETO_REFUGIO {
                             break;
                         case 5:
                             System.out.println("REVISAR COMIDA DISPONIBLE");
+                            revisarComidaDisponible ();
                             break;
                     }
-
                     break;
 
                 case 3:
@@ -110,7 +133,7 @@ public class RETO_REFUGIO {
                     System.out.println("(1) Revisar solicitud");
                     System.out.println("(2) Hacer seguimiento de adopción");
 
-                    opc(2);
+                    opc = opc(2);
                     switch (opc) {
                         case 1:
                             System.out.println("REVISAR SOLICITUD DE ADOPCIÓN");
@@ -129,7 +152,7 @@ public class RETO_REFUGIO {
                     System.out.println("(3) Aumentar salario");
                     System.out.println("(4) Asignar horario");
 
-                    opc(4);
+                    opc = opc(4);
                     switch (opc) {
                         case 1:
                             System.out.println("ALTA DE EMPLEADO");
@@ -265,6 +288,71 @@ public class RETO_REFUGIO {
         int id = scan.nextInt();
         scan.nextLine();
         return id;
+    }
+
+    public static void bajaAnimal(int id) {
+        if (id <= animales.size()) {
+            animales.remove(id);
+        } else {
+            System.out.println("Id inexistente");
+        }
+    }
+
+    public static void revisionMedica(int id) {
+        System.out.println("Fecha: ");
+        String fecha = scan.next();
+        System.out.println("Notas: ");
+        String notas = scan.next();
+        String revision = fecha + ". " + notas;
+        animales.get(id).hacerRevision(revision);
+    }
+
+    public static void mostrarHistorial(int id) {
+        Animal animal = animales.get(id);
+        int nRev = animal.getRevisiones().size();
+        if (nRev != 0) {
+            for (int i = 0; i < nRev; i++) {
+                System.out.println((i + 1) + "- "
+                        + animal.getRevisiones().get(i));
+            }
+        } else {
+            System.out.println("No constan revisiones con esa ID");
+        }
+
+    }
+
+    public static void estadoAnimales() {
+        for (int i = 0; i < animales.size(); i++) {
+            Animal a = animales.get(i);
+            System.out.println("ID. " + a.getId()
+                    + " Salud: " + a.getSalud() + ". HIGIENE: "
+                    + a.getHigiene());
+        }
+
+    }
+
+    public static void alimentarAnimales() {
+        for (Animal a : animales){
+            a.comer();
+        }
+    }
+
+    public static void revisarComidaDisponible() {
+        int rd = Animal.getRacionesDisponibles();
+        int size = animales.size();
+        float comidas = rd / size;
+        System.out.println("Hay " + comidas + " comidas disponibles");
+        
+        if (comidas < 3){
+            System.out.println("Comprar comida. Introducir cantidad: ");
+            int i = scan.nextInt();
+            scan.nextLine();
+            Animal.comprarComida(i);
+            rd = Animal.getRacionesDisponibles();
+            comidas = rd / size;
+            System.out.println("Hay " + comidas + " comidas disponibles");
+        }
+                
     }
     
 
