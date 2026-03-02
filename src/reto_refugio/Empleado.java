@@ -56,7 +56,7 @@ public class Empleado extends Persona{
             int num = 0;
             for(int i = 0; i < length; i++)
             {
-                if(animal[i].getEspecie() == text)
+                if(animal[i].getEspecie().equalsIgnoreCase(text))
                 {
                     System.out.println(++num + "º animal compatible:");
                     System.out.print("Nombre: " + animal[i].getNombre());
