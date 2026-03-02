@@ -13,17 +13,32 @@ import java.time.LocalDate;
 public class Administrativo extends Empleado{
     private Adoptante[] adoptantes;
     private String[] reportes;
-    int num;
+    private int num;
+    private int amount;
 
     public Administrativo(Adoptante[] adoptantes, String nombre, String apellido, LocalDate alta, float salario) {
         super(nombre, apellido, alta, salario);
         this.adoptantes = adoptantes;
         this.reportes = new String[1000];
         num = 0;
+        amount = 0;
     }
     
     public void addReporte(String reporte)
     {
-        reportes[num++] = reporte;
+        if(reportes.length > num)
+            reportes[num++] = reporte;
+    }
+    
+    public void registrar(Adoptante ado)
+    {
+        if(amount >= adoptantes.length)
+            return;
+        for(int i = 0; i < amount; i++)
+        {
+            if(adoptantes[i].getNombre().equalsIgnoreCase(ado.getNombre()))
+                return;
+        }
+        adoptantes[amount++] = ado;
     }
 }
