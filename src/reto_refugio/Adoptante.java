@@ -4,20 +4,26 @@
  */
 package reto_refugio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author s.ortega
  */
 public class Adoptante extends Persona{
     private Adopcion[] adopcion;
+    private int num;
 
     public Adoptante(Adopcion[] adopcion, String nombre, String apellidos) {
         super(nombre, apellidos);
         this.adopcion = adopcion;
+        num = 0;
     }
     
-    public void elige(Animal a)
+    public void elige(Animal a, Administrativo admin)
     {
-        //Posteriormente se añadirá
+        admin.registrar(this);
+        a.setFechaBaja(LocalDate.now());
+        adopcion[num++] = new Adopcion(this, a, LocalDate.now()); 
     }
 }
