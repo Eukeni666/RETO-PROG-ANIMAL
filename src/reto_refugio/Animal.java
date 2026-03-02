@@ -1,6 +1,7 @@
 package reto_refugio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -12,11 +13,14 @@ public class Animal {
     
     static Random rand = new Random ();
     
-    static final int MAX_REVISIONES = 50;
-    static final int MAX_RACIONES = 1000; 
-    
-    static int racionesDisponibles = MAX_RACIONES;
+    static final int MAX_RACIONES = 1000; // capacidad de almacenamieento
+    static int racionesDisponibles = MAX_RACIONES/2; // el almacén está por la mitad
         
+    /* Sirve para inicializar el campo id, y sigue aumentando aunque haya
+    bajas de animales, de tal manera que ninguna id se repite */
+    static int contadorId = 0; // sigue aumentando aunque haya bajas
+    
+    private int id;
     private String especie;
     private LocalDate fechaAlta;
     private LocalDate fechaBaja; // adopción o muerte
@@ -28,13 +32,14 @@ public class Animal {
     private int higiene; // de 0 a 10, el cuidador lo pone al valor que sea al limpiar ()
     private boolean sexo; // 0 hembra, 1 macho
     private Cuidador cuidador;
-    private String [] revisiones;
-    private int contadorRevisiones;
+    private ArrayList <String> revisiones;
     private String nombre;
     
    
     // ¿inicializar atributos con null?
     public Animal (String especie, LocalDate fechaAlta, boolean sexo){
+        id = contadorId;
+        contadorId ++;
         this.especie = especie;
         this.fechaAlta = fechaAlta;
         fechaBaja = null;
@@ -46,13 +51,14 @@ public class Animal {
         higiene = rand.nextInt(11);
         this.sexo = sexo;
         cuidador = null;
-        revisiones = new String [MAX_REVISIONES];
-        contadorRevisiones = 0;
-        RETO_REFUGIO.animales [RETO_REFUGIO.contadorAnimales] = this;
-        RETO_REFUGIO.contadorAnimales ++;
+        revisiones = new ArrayList <String> ();
+        RETO_REFUGIO.animales.add (this);
     }
 
     /* GETTERS */
+    public int getId (){
+        return id;
+    }
     public String getEspecie() {
         return especie;
     }
@@ -86,7 +92,7 @@ public class Animal {
     public Cuidador getCuidador() {
         return cuidador;
     }
-    public String[] getRevisiones() {
+    public ArrayList <String> getRevisiones() {
         return revisiones;
     }
     public int getRacionesDisponibles (){
@@ -98,9 +104,12 @@ public class Animal {
     }
 
     /* SETTERS */
+    // no pongo setId porque se asigna en el constructor y no es modificable
     public void setEspecie(String especie) {
         this.especie = especie;
     }
+    
+    // tal vez sí convenga poder establecerla
 //    public void setFechaAlta(LocalDate fechaAlta) {
 //        this.fechaAlta = fechaAlta;
 //    }
@@ -149,8 +158,7 @@ public class Animal {
     }
     
     public void hacerRevision (String s){
-        revisiones [contadorRevisiones] = s;
-        contadorRevisiones ++;
+        revisiones.add(s);
     }
 
     /* OTROS MÉTODOS */
@@ -176,24 +184,24 @@ public class Animal {
     
     @Override
     public String toString (){
-        String txt = "\nESPECIE: "+ especie.toUpperCase() + ""
-                + "\t FECHA DE ALTA: " + fechaAlta +
-                "\nSEXO: ";
+        String txt = "\n ID: " + id + "\t ESPECIE: "+ especie.toLowerCase() + ""
+                + "\n FECHA DE ALTA: " + fechaAlta +
+                "\t SEXO: ";
         if (sexo){
             txt += "Macho";
         } else {
             txt += "Hembra";
         }
-        txt += "\t SALUD: " + salud + ""
+        txt += "\n SALUD: " + salud + ""
                 + "\t HIGIENE: " + higiene +
 //                "\n CUIDADOR " + cuidador.getNombre () +
-                "\nREVISIONES: ";
+                "\n REVISIONES: ";
         
-        if (contadorRevisiones == 0){
+        if (revisiones.size() == 0){
             txt += "NO";
         } else {
-            for (int i = 0; i < revisiones.length; i++) {
-                txt += "\n- " + revisiones [i];
+            for (int i = 0; i < revisiones.size(); i++) {
+                txt += "\n- " + (i+1) + ". " + revisiones.get(i);
             }
         }
         return txt;
