@@ -2,6 +2,7 @@ package reto_refugio;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,12 +15,13 @@ public class RETO_REFUGIO {
     static final int MAX_ANIMALES = 60;
     
     /* Array donde se incluyen todos los animales al crearlos */
-    static Animal [] animales = new Animal [MAX_ANIMALES];
+    //static Animal [] animales = new Animal [MAX_ANIMALES];
+    static ArrayList <Animal> animales = new ArrayList <>();
     static int contadorAnimales;
     
     public static void main(String[] args) {
         /* Método para hacer pruebas */
-        //inicioAnimal ();
+        inicioAnimal ();
         
         /**
          * *****************************************
@@ -53,6 +55,7 @@ public class RETO_REFUGIO {
                         altaAnimal ();
                         break;
                     case 2: System.out.println("BAJA DE ANIMAL.");
+                        bajaAnimal ();
                         break;
                     case 3: System.out.println("MOSTRAR ESTADO DE ANIMAL");
                         break;
@@ -149,8 +152,8 @@ public class RETO_REFUGIO {
         for (int i = 0; i < contadorAnimales; i++) {
             System.out.println("");
             System.out.println("ANIMAL " + (i+1) + ":"
-                    + "\nESPECIE: " + animales [i].getEspecie() +
-                    "\nFECHA DE ALTA: " + animales [i].getFechaAlta());
+                    + "\nESPECIE: " + animales.get(i).getEspecie() +
+                    "\nFECHA DE ALTA: " + animales.get(i).getFechaAlta());
         }
     }
     
@@ -166,7 +169,8 @@ public class RETO_REFUGIO {
         return opc;
     }
 
-    private static void altaAnimal() {
+    public static void altaAnimal() {
+        /* Asegurarse de que no se ha llegado a la capacidad máxima del refugio */
         if (contadorAnimales < MAX_ANIMALES){
             System.out.println("(1) Perro"
                     + "\n(2) Gato"
@@ -198,7 +202,7 @@ public class RETO_REFUGIO {
         }
     }
 
-    private static boolean sexo() {
+    public static boolean sexo() {
         System.out.println("Sexo: (1) Macho (2) Hembra");
         int opc = opc (2);
         if (opc == 1){
@@ -208,13 +212,13 @@ public class RETO_REFUGIO {
         }
     }
 
-    private static String especie() {
+    public static String especie() {
         System.out.println("Especie: ");
         String especie = scan.nextLine();
         return especie;
     }
 
-    private static boolean vuela() {
+    public static boolean vuela() {
         System.out.println("(1) Voladora (2) No voladora");
         int opc = opc (2);
         if (opc == 1){
@@ -223,4 +227,12 @@ public class RETO_REFUGIO {
             return false;
         }
     }
+
+    public static void bajaAnimal (){
+        System.out.println("Id del animal a eliminar: ");
+        int id = scan.nextInt();
+        animales.remove (id);
+    }
+    
+
 }
