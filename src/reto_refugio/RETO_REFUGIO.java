@@ -19,8 +19,10 @@ public class RETO_REFUGIO {
 
     
     public static void main(String[] args) {
-        /* Método para hacer pruebas */
-        inicioAnimal ();
+        /* Método para hacer pruebas.
+        PODÉIS COMENTARLO SIEMPRE QUE QUERÁIS, SI OS ESTORBA
+        Yo lo pongo y lo quito */
+        //inicioAnimal ();
         
         /**
          * *****************************************
@@ -111,8 +113,7 @@ public class RETO_REFUGIO {
                 
                 opc (4);
                 switch (opc) {
-                    case 1: System.out.println("ALTA DE EMPLEADO"
-                            + "\n");
+                    case 1: System.out.println("ALTA DE EMPLEADO");
                         break;
                     case 2: System.out.println("BAJA DE EMPLEADO");
                         break;

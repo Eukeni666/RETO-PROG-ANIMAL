@@ -70,6 +70,6 @@ public class Gerente extends Cuidador{
     
     public void seguimiento()
     {
-        // Para discutir
+        // Para discutir, puede ser eliminado
     }
 }
