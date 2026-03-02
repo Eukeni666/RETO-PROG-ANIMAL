@@ -5,46 +5,58 @@
 package reto_refugio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author s.ortega
  */
 public class Cuidador extends Empleado{
-    private Animal[] animales;
+    private ArrayList<Animal> animales;
 
-    public Cuidador(Animal[] animales, String nombre, String apellidos, LocalDate alta, float salario) {
+    public Cuidador(ArrayList<Animal> animales, String nombre, String apellidos, LocalDate alta, float salario) {
         super(nombre, apellidos, alta, salario);
         this.animales = animales;
     }
 
-    public Animal[] getAnimales() {
+    public void setAnimales(ArrayList<Animal> animales) {
+        this.animales = animales;
+    }
+
+    public void setAnimales(Animal animal) {
+        this.animales.add(animal);
+    }
+
+    public ArrayList<Animal> getAnimales() {
         return animales;
     }
 
-    public void setAnimales(Animal[] animales) {
-        this.animales = animales;
+    public Animal getAnimales(int i) {
+        return animales.get(i);
     }
     
     public void alimentar(int cual)
     {
-        if(cual < animales.length && cual >= 0)
-            animales[cual].comer();
+        if(cual < animales.size() && cual >= 0)
+            animales.get(cual).comer();
     }
     
     public void revisarSalud(int cual, String revision)
     {
-        animales[cual].hacerRevision(revision);
+        if(cual < animales.size() && cual >= 0)
+        animales.get(cual).hacerRevision(revision);
     }
     
     public void tratamiento(int cual)
     {
-        animales[cual].setSalud(10);
+        if(cual < animales.size() && cual >= 0)
+        animales.get(cual).setSalud(10);
     }
     
     public void curar(int cual)
     {
-        animales[cual].setSalud(2);
+        if(cual < animales.size() && cual >= 0)
+        animales.get(cual).setSalud(2);
     }
     
     public void cuidar(int cual)
@@ -54,12 +66,15 @@ public class Cuidador extends Empleado{
     
     public void limpiar(int cual)
     {
-        animales[cual].setHigiene(10);
+        if(cual < animales.size() && cual >= 0)
+        animales.get(cual).setHigiene(10);
     }
     
     public Animal entregar(int cual)
     {
-        return animales[cual];
+        if(cual < animales.size() && cual >= 0)
+        return animales.get(cual);
+        return null;
     }
     
     public void documentar(Administrativo admin, String reporte)
