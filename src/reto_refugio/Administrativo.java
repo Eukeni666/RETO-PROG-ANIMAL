@@ -14,15 +14,11 @@ import java.util.ArrayList;
 public class Administrativo extends Empleado{
     private ArrayList<Adoptante> adoptantes;
     private ArrayList<String> reportes;
-    private int num;
-    private int amount;
 
     public Administrativo(String nombre, String apellido, LocalDate alta, float salario) {
         super(nombre, apellido, alta, salario);
         this.adoptantes = new ArrayList<Adoptante>();
         this.reportes = new ArrayList<String>();
-        num = 0;
-        amount = 0;
     }
     
     public void addReporte(String reporte)
