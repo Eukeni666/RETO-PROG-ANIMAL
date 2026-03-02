@@ -16,12 +16,9 @@ public class RETO_REFUGIO {
     /* Array donde se incluyen todos los animales al crearlos */
     static Animal [] animales = new Animal [MAX_ANIMALES];
     static int contadorAnimales;
-
     
     public static void main(String[] args) {
-        /* Método para hacer pruebas.
-        PODÉIS COMENTARLO SIEMPRE QUE QUERÁIS, SI OS ESTORBA
-        Yo lo pongo y lo quito */
+        /* Método para hacer pruebas */
         //inicioAnimal ();
         
         /**
@@ -52,7 +49,7 @@ public class RETO_REFUGIO {
                 
                 opc (6);
                 switch (opc) {
-                    case 1: System.out.println("ALTA DE ANIMAL.");
+                    case 1: System.out.println("ALTA DE ANIMAL.");                    
                         altaAnimal ();
                         break;
                     case 2: System.out.println("BAJA DE ANIMAL.");
@@ -136,9 +133,18 @@ public class RETO_REFUGIO {
         
         Perro p = new Perro (fecha.now(), false);
         Perro p2 = new Perro (fecha.now().minusWeeks(3), true);
+        Mamifero m1 = new Mamifero ("gato", fecha.now(), false);
+        Mamifero m2 = new Mamifero ("hamster", fecha.now().minusDays(37), false);
+        Ave a1 = new Ave ("pelícano", fecha.now().minusMonths(3), true, true);
+        Reptil r1 = new Reptil ("iguana", fecha.now().minusYears(2), true);
         
         System.out.println(p);
         System.out.println(p2);
+        System.out.println(m1);
+        System.out.println(m2);
+        System.out.println(a1);
+        System.out.println(r1);
+        
         System.out.println("\nNº de animales: " + contadorAnimales);
         for (int i = 0; i < contadorAnimales; i++) {
             System.out.println("");
@@ -150,59 +156,71 @@ public class RETO_REFUGIO {
     
     public static int opc (int i){
         int opc = scan.nextInt();
+        scan.nextLine ();
         while (opc < 1 || opc > i){
             System.out.println("Opción no válida."
                     + "\nIntroduzca un número entre 1 y " + i);
             opc = scan.nextInt();
+            scan.nextLine ();
         }
         return opc;
     }
-    
-    public static void altaAnimal (){
-        System.out.println("Especie: "
-                + "\n(1) Perro"
-                + "\n(2) Gato"
-                + "\n(3) Otro mamífero"
-                + "\n(4) Ave"
-                + "\n(5) Reptil");
-        int opc = opc (5);
-        
-        boolean sexo = sexo ();
-        
-        switch (opc){
-            case 1: new Perro (fecha.now(), sexo);
-                break;
-            case 2: new Mamifero ("gato", fecha.now(), sexo);
-                break;
-            case 3: String especie = especie ();
-                new Mamifero (especie, fecha.now(), sexo);
-                break;
-            case 4: 
-                break;
-            case 5: 
-                break;
+
+    private static void altaAnimal() {
+        if (contadorAnimales < MAX_ANIMALES){
+            System.out.println("(1) Perro"
+                    + "\n(2) Gato"
+                    + "\n(3) Otro mamífero"
+                    + "\n(4) Ave"
+                    + "\n(5) Reptil");
+            
+            int opc = opc (5);
+            boolean sexo = sexo ();
+            String especie = "";
+            
+            switch (opc){
+                case 1: new Perro (fecha.now(), sexo);
+                    break;
+                case 2: new Mamifero ("gato", fecha.now(), sexo);
+                    break;
+                case 3:
+                    especie = especie ();
+                    new Mamifero (especie, fecha.now(), sexo);
+                    break;
+                case 4: especie = especie ();
+                    boolean vuela = vuela ();
+                    new Ave (especie, fecha.now(), sexo, vuela);
+                    break;
+                case 5: especie = especie ();
+                    new Reptil (especie, fecha.now(), sexo);
+                    break;
+            }
         }
-        
-        
     }
-    
-    public static boolean sexo () {
+
+    private static boolean sexo() {
         System.out.println("Sexo: (1) Macho (2) Hembra");
-        int i = opc (2);
-        if (i == 1){
+        int opc = opc (2);
+        if (opc == 1){
             return true;
         } else {
             return false;
         }
-
     }
-    
-    public static String especie (){
-        System.out.println("Introducir especie: ");
-        String especie = scan.nextLine ();
+
+    private static String especie() {
+        System.out.println("Especie: ");
+        String especie = scan.nextLine();
         return especie;
     }
-    
-    
-    
+
+    private static boolean vuela() {
+        System.out.println("(1) Voladora (2) No voladora");
+        int opc = opc (2);
+        if (opc == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
