@@ -55,9 +55,10 @@ public class RETO_REFUGIO {
                         altaAnimal ();
                         break;
                     case 2: System.out.println("BAJA DE ANIMAL.");
-                        bajaAnimal ();
+                        animales.remove (getIdAnimal ());
                         break;
                     case 3: System.out.println("MOSTRAR ESTADO DE ANIMAL");
+                        System.out.println(animales.get(getIdAnimal()));
                         break;
                     case 4: System.out.println("ENTREGAR EN ADOPCIÓN");
                         break;
@@ -228,10 +229,11 @@ public class RETO_REFUGIO {
         }
     }
 
-    public static void bajaAnimal (){
+    public static int getIdAnimal (){
         System.out.println("Id del animal a eliminar: ");
         int id = scan.nextInt();
-        animales.remove (id);
+        scan.nextLine();
+        return id;
     }
     
 
