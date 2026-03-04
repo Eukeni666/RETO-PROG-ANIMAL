@@ -170,7 +170,7 @@ public class RETO_REFUGIO {
 
                     break;
             }
-            System.out.println("(0) Salir (1) Continuar");
+            System.out.println("\n(0) Salir (1) Continuar");
                 opc = scan.nextInt();
                 scan.nextLine();
                 if (opc == 0) {
@@ -178,9 +178,7 @@ public class RETO_REFUGIO {
                 }
             
         } while (!salir);
-        
-        
-        
+                
     }
     
     /* Método para hacer pruebas */
@@ -324,11 +322,27 @@ public class RETO_REFUGIO {
     public static void estadoAnimales() {
         for (int i = 0; i < animales.size(); i++) {
             Animal a = animales.get(i);
-            System.out.println("ID. " + a.getId()
-                    + " Salud: " + a.getSalud() + ". HIGIENE: "
+            System.out.print("\nID. " + a.getId() + ". " + a.getEspecie().toUpperCase()
+                    + "\t Salud: " + a.getSalud() + "\t HIGIENE: "
                     + a.getHigiene());
+            if (a instanceof Mamifero){
+                Mamifero m = (Mamifero)a;
+                System.out.print("\t Pelaje: ");
+                //boolean pelaje = ((Mamifero) a).isPresentable(); // NETBEANS
+                boolean pelaje = m.isPresentable();
+                if (pelaje){
+                    System.out.print("Buen estado");
+                } else {
+                    System.out.print("Mal estado");
+                }
+            }
+            if (a instanceof Reptil){
+                Reptil r = (Reptil)a;
+                int temperatura = r.getTemperatura ();
+                boolean tOptima = r.getTemperaturaOptima(temperatura);
+            }
         }
-
+        System.out.println("");
     }
 
     public static void alimentarAnimales() {
