@@ -137,6 +137,7 @@ public class RETO_REFUGIO {
                     switch (opc) {
                         case 1:
                             System.out.println("REVISAR SOLICITUD DE ADOPCIÓN");
+                            adopcion ();
                             break;
                         case 2:
                             System.out.println("SEGUIMIENTO DE ADOPCIÓN");
@@ -367,6 +368,58 @@ public class RETO_REFUGIO {
             System.out.println("Hay " + comidas + " comidas disponibles");
         }
                 
+    }
+
+    public static void adopcion() {
+        String nombre = solicitarDatos ("Nombre del solicitante: ");
+        String apellidos = solicitarDatos ("Apellidos: ");
+        String direccion = solicitarDatos ("Dirección: ");
+        String tfno = solicitarDatos ("Tfno: ");
+        
+        int id = getIdAnimal ();
+        Animal animal = animales.get(id); 
+               
+        boolean aceptada = evaluarAdopcion ();
+        if (aceptada){
+            System.out.println("Adopción aprobada");
+            animal.setHigiene (10);
+            if (animal instanceof Mamifero){
+                Mamifero m = (Mamifero)animal;
+                m.setPresentable(true);
+                System.out.println("\n******************");
+                System.out.println("FICHA DE ADOPCIÓN: ");
+                System.out.println("******************");
+                System.out.println("ANIMAL:");
+                System.out.println(m);
+                System.out.println("ADOPTANTE: " + apellidos + ", " + nombre + 
+                        "\n DIRECCION: " + direccion + "\t TFNO: " + tfno);
+                System.out.println("*******************");
+            }
+        } else {
+            System.out.println("Adopción no aprobada");
+        }
+    }
+
+    public static String solicitarDatos (String s) {
+        String txt = "";
+        System.out.println(s);
+        txt = scan.nextLine();
+        return txt;
+    }
+    
+    public static boolean evaluarAdopcion (){
+        int n;
+        do {
+            System.out.println("¿Se aprueba la adopción?"
+                + "\n (1)SÍ (2)NO");
+            n = scan.nextInt ();
+            scan.nextLine ();
+        } while (! (n == 1 || n == 0));
+        if (n == 1){
+            return true;
+        } else {
+            return false;
+        }
     }
     
 
