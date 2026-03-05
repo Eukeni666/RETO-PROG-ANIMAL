@@ -53,6 +53,7 @@ public class Gerente extends Cuidador{
     
     public void despedir(Empleado empleado)
     {
+        if(empleado != this)
         empleado.vigente = false;
     }
     
