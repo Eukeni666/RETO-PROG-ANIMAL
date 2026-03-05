@@ -30,7 +30,7 @@ public class Administrativo extends Empleado{
     {
         for(Adoptante a:adoptantes)
         {
-            if(a.getNombre().equalsIgnoreCase(ado.getNombre()))
+            if(a.getDNI().equalsIgnoreCase(ado.getDNI()))
                 return;
         }
         adoptantes.add(ado);
