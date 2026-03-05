@@ -48,6 +48,11 @@ public class Empleado extends Persona{
         return filtro;
     }
     
+    public void nombrar(Animal ani, String nombre)
+    {
+        ani.setNombre(nombre);
+    }
+    
     private void listarAnimales(Animal[] animal, Filtro filtro, String text)
     {
         if(filtro.equals("ESPECIE"))
