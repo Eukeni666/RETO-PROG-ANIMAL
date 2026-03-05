@@ -13,10 +13,16 @@ import java.util.ArrayList;
  */
 public class Adoptante extends Persona{
     private ArrayList<Adopcion> adopcion;
+    private String DNI; 
 
-    public Adoptante(String nombre, String apellidos) {
+    public Adoptante(String nombre, String apellidos, String DNI) {
         super(nombre, apellidos);
         this.adopcion = new ArrayList<Adopcion>();
+        this.DNI = DNI;
+    }
+
+    public String getDNI() {
+        return DNI;
     }
     
     public void elige(Animal a, Administrativo admin)
