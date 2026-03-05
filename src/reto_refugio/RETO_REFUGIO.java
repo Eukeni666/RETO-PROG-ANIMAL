@@ -17,9 +17,14 @@ public class RETO_REFUGIO {
     /* Array donde se incluyen todos los animales al crearlos */
     //static Animal [] animales = new Animal [MAX_ANIMALES];
     static ArrayList <Animal> animales = new ArrayList <>();
+    static ArrayList <Empleado> empleados = new ArrayList <>();
     
     public static void main(String[] args) {
         /* Método para hacer pruebas */
+        
+        Gerente boss = new Gerente(animales, animales, "Pepe", "Giménez", fecha.now(), 12000);
+        empleados.add(boss);
+        empleados.add(new Administrativo("Joaquin", "Romero", fecha.now(), 1500));
         inicioAnimal ();
         
         boolean salir = false;
@@ -156,16 +161,35 @@ public class RETO_REFUGIO {
                     opc = opc(4);
                     switch (opc) {
                         case 1:
-                            System.out.println("ALTA DE EMPLEADO");
+                            String name;
+                            String surnames;
+                            float salary;
+                            System.out.println("Introduce el nombre del nuevo empleado");
+                            name = scan.nextLine();
+                            System.out.println("Introduce los apellidos del nuevo empleado");
+                            surnames = scan.nextLine();
+                            System.out.println("Introduce el salario del nuevo empleado");
+                            salary = scan.nextFloat();
+                            empleados.add(boss.contratar(name, surnames, fecha, salary));
                             break;
                         case 2:
-                            System.out.println("BAJA DE EMPLEADO");
+                            System.out.println("¿Cual empleado deseas despedir?");
+                            int cual = opc(empleados.size());
+                            boss.despedir(empleados.get(--cual));
                             break;
                         case 3:
-                            System.out.println("AUMENTAR SALARIO");
+                            System.out.println("¿Cual empleado deseas aumentarle el salario?");
+                            cual = opc(empleados.size());
+                            System.out.println("¿De cuanto deseas sea el salario?");
+                            salary = scan.nextFloat();
+                            boss.modSalario(empleados.get(--cual), salary);
                             break;
                         case 4:
-                            System.out.println("ASIGNAR HORARIO");
+                            System.out.println("¿Cual empleado deseas cambiarle el horario?");
+                            cual = opc(empleados.size());
+                            System.out.println("Introduce como quieres que sea su horario");
+                            name = scan.nextLine();
+                            boss.setHorario(empleados.get(--cual), name);
                             break;
                     }
 
