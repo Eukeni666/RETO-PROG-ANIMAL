@@ -122,6 +122,7 @@ public class RETO_REFUGIO {
                             break;
                         case 3:
                             System.out.println("LIMPIAR ANIMALES Y ESPACIOS");
+                            limpiar ();
                             break;
                         case 4:
                             System.out.println("DOCUMENTAR ACTIVIDAD");
@@ -443,6 +444,16 @@ public class RETO_REFUGIO {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private static void limpiar() {
+        for (Animal a : animales){
+            a.setHigiene(10);
+            if (a instanceof Mamifero){
+                Mamifero m = (Mamifero)a;
+                m.setPresentable(true);
+            }
         }
     }
     

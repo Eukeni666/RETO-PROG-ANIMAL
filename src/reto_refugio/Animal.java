@@ -131,7 +131,9 @@ public class Animal {
     /* el método curar () llamaría a este para INCREMENTAR el valor de salud. 
     O sea, es += en lugar de un setter real*/
     public void setSalud(int salud) {
-        this.salud += salud;
+        if (this.salud < 10){
+            this.salud += salud;
+        }
     }
     /* el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
     por parámetro el valor (NO se incrementa, ES el valor)*/
@@ -167,20 +169,31 @@ public class Animal {
         boolean hay = racionesDisponibles > 0;
         if (hay) {
             racionesDisponibles--;
-            higiene--;
+            if (higiene > 0){
+                higiene--;
+            }
         } else {
             System.out.println("No hay comida");
-            salud --;
+            if (salud > 0){
+                salud --;
+            }
         }
     }
     
     public void enfermar () {
-        salud -= 2;
+        if (salud >= 2){
+            salud -= 2;
+        } else if (salud == 1){
+            salud --;
+            morir ();
+        }
     }
     
     public void morir (){
         // desaparece del array de animales
         // ¿? hay una plaza más
+        System.out.println(this.getEspecie().toUpperCase() + ", ID " +  this.getId()+  " FALLECIDO.");
+        RETO_REFUGIO.animales.remove(this);
     }
     
     public void printProvisional (){
