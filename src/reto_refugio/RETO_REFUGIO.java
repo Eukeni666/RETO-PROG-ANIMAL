@@ -419,6 +419,7 @@ public class RETO_REFUGIO {
                 System.out.println("ADOPTANTE: " + apellidos + ", " + nombre + 
                         "\n DIRECCION: " + direccion + "\t TFNO: " + tfno);
                 System.out.println("*******************");
+                animales.remove(animal);
             }
         } else {
             System.out.println("Adopción no aprobada");
