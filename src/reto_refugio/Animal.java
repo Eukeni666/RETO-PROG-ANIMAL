@@ -203,7 +203,7 @@ public class Animal {
     
     @Override
     public String toString (){
-        String txt = "\n ID: " + id + "\t ESPECIE: "+ especie.toLowerCase() + ""
+        String txt = " ID: " + id + "\t ESPECIE: "+ especie.toLowerCase() + ""
                 + "\n FECHA DE ALTA: " + fechaAlta +
                 "\t SEXO: ";
         if (sexo){

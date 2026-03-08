@@ -17,6 +17,7 @@ public class RETO_REFUGIO {
     /* Array donde se incluyen todos los animales al crearlos */
     //static Animal [] animales = new Animal [MAX_ANIMALES];
     static ArrayList <Animal> animales = new ArrayList <>();
+    static ArrayList <Adoptante> adoptantes = new ArrayList <>();
     static ArrayList <Empleado> empleados = new ArrayList <>();
     
     public static void main(String[] args) {
@@ -398,9 +399,10 @@ public class RETO_REFUGIO {
     public static void adopcion() {
         String nombre = solicitarDatos ("Nombre del solicitante: ");
         String apellidos = solicitarDatos ("Apellidos: ");
+        String dni = solicitarDatos ("DNI: ");
         String direccion = solicitarDatos ("Dirección: ");
         String tfno = solicitarDatos ("Tfno: ");
-        
+                
         int id = getIdAnimal ();
         Animal animal = animales.get(id); 
                
@@ -411,16 +413,36 @@ public class RETO_REFUGIO {
             if (animal instanceof Mamifero){
                 Mamifero m = (Mamifero)animal;
                 m.setPresentable(true);
-                System.out.println("\n******************");
-                System.out.println("FICHA DE ADOPCIÓN: ");
-                System.out.println("******************");
-                System.out.println("ANIMAL:");
-                System.out.println(m);
-                System.out.println("ADOPTANTE: " + apellidos + ", " + nombre + 
-                        "\n DIRECCION: " + direccion + "\t TFNO: " + tfno);
-                System.out.println("*******************");
-                animales.remove(animal);
             }
+            
+            Administrativo admin;
+            for (Empleado e: empleados){
+                if (e instanceof Administrativo){
+                    admin = (Administrativo)e;
+                    
+                    for (Adoptante adop : adoptantes){
+                        if (adop.getDNI().equalsIgnoreCase(dni)) {
+                            adop.elige(animal, admin);
+                        } else {
+                            Adoptante x = new Adoptante(nombre, apellidos, dni);
+                            x.elige(animal, admin);
+                        }
+                    }                    
+                } else {
+                    System.out.println("Administrativo no disponible");
+                }
+            }
+
+            System.out.println("\n******************");
+            System.out.println("FICHA DE ADOPCIÓN: ");
+            System.out.println("******************");
+            System.out.println("ANIMAL:");
+            System.out.println(animal);
+            System.out.println("ADOPTANTE: " + apellidos + ", " + nombre
+                    + "\n DIRECCION: " + direccion + "\t TFNO: " + tfno);
+            System.out.println("*******************");
+            animales.remove(animal);
+
         } else {
             System.out.println("Adopción no aprobada");
         }
