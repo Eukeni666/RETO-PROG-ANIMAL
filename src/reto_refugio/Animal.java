@@ -12,10 +12,7 @@ import java.util.Random;
 public class Animal {
     
     static Random rand = new Random ();
-    
-    static final int MAX_RACIONES = 1000; // capacidad de almacenamieento
-    static int racionesDisponibles = 40/2; // el almacén está por la mitad
-        
+            
     /* Sirve para inicializar el campo id, y sigue aumentando aunque haya
     bajas de animales, de tal manera que ninguna id se repite */
     static int contadorId = 0; // sigue aumentando aunque haya bajas
@@ -95,9 +92,6 @@ public class Animal {
     public ArrayList <String> getRevisiones() {
         return revisiones;
     }
-    public static int getRacionesDisponibles (){
-        return racionesDisponibles;
-    }
     
     public String getNombre (){
         return nombre;
@@ -150,14 +144,7 @@ public class Animal {
         this.nombre = nombre;
     }
     
-    /**
-     * Al comprar comida se incrementan las raciones disponibles en el valor
-     * del parámetro
-     * @param: cantidad de raciones que se compran
-     */
-    public static void comprarComida (int i){
-        racionesDisponibles += i;
-    }
+    
     
     public void pasarRevision (String s){
         revisiones.add(s);
@@ -166,9 +153,9 @@ public class Animal {
     /* OTROS MÉTODOS */
     /* Comer afecta a la higiene */
     public void comer() {
-        boolean hay = racionesDisponibles > 0;
+        boolean hay = RETO_REFUGIO.racionesDisponibles > 0;
         if (hay) {
-            racionesDisponibles--;
+            RETO_REFUGIO.racionesDisponibles--;
             if (higiene > 0){
                 higiene--;
             }
@@ -192,13 +179,14 @@ public class Animal {
     public void morir (){
         // desaparece del array de animales
         // ¿? hay una plaza más
-        System.out.println(this.getEspecie().toUpperCase() + ", ID " +  this.getId()+  " FALLECIDO.");
+        System.out.println(this.getEspecie().toUpperCase() + ", ID " +  
+                this.getId()+  " FALLECIDO.");
         RETO_REFUGIO.animales.remove(this);
     }
     
     public void printProvisional (){
-        System.out.println(especie + ". Fecha alta: " + fechaAlta + ". Salud: " + salud +
-                racionesDisponibles);
+        System.out.println(especie + ". Fecha alta: " + fechaAlta + ". Salud: "
+                + "" + salud);
     }
     
     @Override

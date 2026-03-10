@@ -44,7 +44,7 @@ public class Cuidador extends Empleado{
     public void revisarSalud(int cual, String revision)
     {
         if(cual < animales.size() && cual >= 0)
-        animales.get(cual).hacerRevision(revision);
+        animales.get(cual).pasarRevision(revision);
     }
     
     public void tratamiento(int cual)

@@ -12,7 +12,11 @@ public class RETO_REFUGIO {
     
     static Scanner scan = new Scanner (System.in);
     static LocalDate fecha;
+    
     static final int MAX_ANIMALES = 60;
+    static final int MAX_RACIONES = 1000; // capacidad de almacenamieento
+    static int racionesDisponibles = opc (MAX_RACIONES);
+
     
     /* Array donde se incluyen todos los animales al crearlos */
     //static Animal [] animales = new Animal [MAX_ANIMALES];
@@ -235,6 +239,7 @@ public class RETO_REFUGIO {
         }
     }
     
+    /* Método para facilitar la entrada de números */
     public static int opc (int i){
         int opc = scan.nextInt();
         scan.nextLine ();
@@ -329,7 +334,7 @@ public class RETO_REFUGIO {
         System.out.println("Notas: ");
         String notas = scan.next();
         String revision = fecha + ". " + notas;
-        animales.get(id).hacerRevision(revision);
+        animales.get(id).pasarRevision(revision);
     }
 
     public static void mostrarHistorial(int id) {
@@ -379,21 +384,27 @@ public class RETO_REFUGIO {
     }
 
     public static void revisarComidaDisponible() {
-        int rd = Animal.getRacionesDisponibles();
         int size = animales.size();
-        float comidas = rd / size;
+        float comidas = racionesDisponibles / size;
         System.out.println("Hay " + comidas + " comidas disponibles");
         
         if (comidas < 3){
             System.out.println("Comprar comida. Introducir cantidad: ");
             int i = scan.nextInt();
             scan.nextLine();
-            Animal.comprarComida(i);
-            rd = Animal.getRacionesDisponibles();
-            comidas = rd / size;
+            comprarComida(i);
+            comidas = racionesDisponibles / size;
             System.out.println("Hay " + comidas + " comidas disponibles");
-        }
-                
+        }            
+    }
+    
+    /**
+     * Al comprar comida se incrementan las raciones disponibles en el valor
+     * del parámetro
+     * @param: cantidad de raciones que se compran
+     */
+    public static void comprarComida (int i){
+        racionesDisponibles += i;
     }
 
     public static void adopcion() {
