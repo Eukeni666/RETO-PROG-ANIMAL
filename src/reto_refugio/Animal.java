@@ -6,23 +6,22 @@ import java.util.Random;
 
 
 /**
- * 
- * @author e.fresco
+ * Superclase que representa a todos los animales del sistema.
+ * El resto de clases heredan de ella.
  */
 public class Animal {
     
-    static Random rand = new Random ();
-            
-    /* Sirve para inicializar el campo id, y sigue aumentando aunque haya
-    bajas de animales, de tal manera que ninguna id se repite */
-    static int contadorId = 0; // sigue aumentando aunque haya bajas
+    static Random rand = new Random ();            
     
-    private int id;
+    /* sirve para inicializar id, pero a diferencia de esta, sigue aumentando 
+    aunque haya bajas (no desaparece)*/
+    static int contadorId = 0;
+    
+    private int id; // única para cada animal, aunque haya bajas
     private String especie;
     private LocalDate fechaAlta;
     private LocalDate fechaBaja; // adopción o muerte
     private String personalidad;
-    private String espacio; // ¿debería ser int? ¿cuál es su función?
     private String alimentacionTipo;
     private String alimentacionPeriodicidad;
     private int salud; // de 1 a 10, 0 muerte
@@ -33,7 +32,6 @@ public class Animal {
     private String nombre;
     
    
-    // ¿inicializar atributos con null?
     public Animal (String especie, LocalDate fechaAlta, boolean sexo){
         id = contadorId;
         contadorId ++;
@@ -41,7 +39,6 @@ public class Animal {
         this.fechaAlta = fechaAlta;
         fechaBaja = null;
         personalidad = "";
-        espacio = "";
         alimentacionTipo = "";
         alimentacionPeriodicidad = "";
         salud = rand.nextInt(1, 11);
@@ -65,18 +62,6 @@ public class Animal {
     public LocalDate getFechaBaja() {
         return fechaBaja;
     }
-    public String getPersonalidad() {
-        return personalidad;
-    }
-    public String getEspacio() {
-        return espacio;
-    }
-    public String getAlimentacionTipo() {
-        return alimentacionTipo;
-    }
-    public String getAlimentacionPeriodicidad() {
-        return alimentacionPeriodicidad;
-    }
     public int getSalud() {
         return salud;
     }
@@ -96,32 +81,48 @@ public class Animal {
     public String getNombre (){
         return nombre;
     }
+    
+    public String getPersonalidad() {
+        return personalidad;
+    }
+
+    public void setPersonalidad(String personalidad) {
+        this.personalidad = personalidad;
+    }
+
+    public String getAlimentacionTipo() {
+        return alimentacionTipo;
+    }
+
+    public void setAlimentacionTipo(String alimentacionTipo) {
+        this.alimentacionTipo = alimentacionTipo;
+    }
+
+    public String getAlimentacionPeriodicidad() {
+        return alimentacionPeriodicidad;
+    }
+
+    public void setAlimentacionPeriodicidad(String alimentacionPeriodicidad) {
+        this.alimentacionPeriodicidad = alimentacionPeriodicidad;
+    }
 
     /* SETTERS */
-    // no pongo setId porque se asigna en el constructor y no es modificable
+    // setId se asigna en el constructor y no es modificable
+    
     public void setEspecie(String especie) {
         this.especie = especie;
     }
     
-    // tal vez sí convenga poder establecerla
-//    public void setFechaAlta(LocalDate fechaAlta) {
-//        this.fechaAlta = fechaAlta;
-//    }
+    /* para poder modificar la fecha que se inserta automáticamente en el 
+    constructor */
+    public void setFechaAlta(LocalDate fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+    
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
-    public void setPersonalidad(String personalidad) {
-        this.personalidad = personalidad;
-    }
-    public void setEspacio(String espacio) {
-        this.espacio = espacio;
-    }
-    public void setAlimentacionTipo(String alimentacionTipo) {
-        this.alimentacionTipo = alimentacionTipo;
-    }
-    public void setAlimentacionPeriodicidad(String alimentacionPeriodicidad) {
-        this.alimentacionPeriodicidad = alimentacionPeriodicidad;
-    }
+
     /* el método curar () llamaría a este para INCREMENTAR el valor de salud. 
     O sea, es += en lugar de un setter real*/
     public void setSalud(int salud) {
@@ -129,6 +130,7 @@ public class Animal {
             this.salud += salud;
         }
     }
+    
     /* el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
     por parámetro el valor (NO se incrementa, ES el valor)*/
     public void setHigiene(int higiene) {
@@ -143,15 +145,12 @@ public class Animal {
     public void setNombre (String nombre){
         this.nombre = nombre;
     }
-    
-    
-    
     public void pasarRevision (String s){
         revisiones.add(s);
     }
 
     /* OTROS MÉTODOS */
-    /* Comer afecta a la higiene */
+    /* Comer disminuye la comida disponible y afecta a la higiene */
     public void comer() {
         boolean hay = RETO_REFUGIO.racionesDisponibles > 0;
         if (hay) {
@@ -183,12 +182,7 @@ public class Animal {
                 this.getId()+  " FALLECIDO.");
         RETO_REFUGIO.animales.remove(this);
     }
-    
-    public void printProvisional (){
-        System.out.println(especie + ". Fecha alta: " + fechaAlta + ". Salud: "
-                + "" + salud);
-    }
-    
+        
     @Override
     public String toString (){
         String txt = " ID: " + id + "\t ESPECIE: "+ especie.toLowerCase() + ""

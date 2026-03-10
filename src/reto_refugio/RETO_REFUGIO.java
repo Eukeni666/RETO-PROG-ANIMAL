@@ -3,35 +3,42 @@ package reto_refugio;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
- *
- * @author e.fresco
+ * Clase principal, que representa un refugio o un centro de acogida de animales.
+ * En él se dan de alta animales y se acogen y se mantienen en buen estado de 
+ * salud e higiene hasta su eventual adopción.
+ *  
+ * @author Javier Ortega, Pablo Álvarez y Eugenio Fresco
  */
 public class RETO_REFUGIO {
     
     static Scanner scan = new Scanner (System.in);
+    static Random rand = new Random ();
     static LocalDate fecha;
     
+    /* Declaración de la máxima disponibilidad de animales y capacidad de 
+    almacenamiento de comida */
     static final int MAX_ANIMALES = 60;
-    static final int MAX_RACIONES = 1000; // capacidad de almacenamieento
-    static int racionesDisponibles = opc (MAX_RACIONES);
+    static final int MAX_RACIONES = 1000; 
+    static int racionesDisponibles = rand.nextInt(100, MAX_RACIONES);
 
-    
-    /* Array donde se incluyen todos los animales al crearlos */
-    //static Animal [] animales = new Animal [MAX_ANIMALES];
     static ArrayList <Animal> animales = new ArrayList <>();
     static ArrayList <Adoptante> adoptantes = new ArrayList <>();
     static ArrayList <Empleado> empleados = new ArrayList <>();
     
     public static void main(String[] args) {
-        /* Método para hacer pruebas */
         
+        /* Datos iniciales de la aplicación */
         Gerente boss = new Gerente(animales, animales, "Pepe", "Giménez", fecha.now(), 12000);
         empleados.add(boss);
         empleados.add(new Administrativo("Joaquin", "Romero", fecha.now(), 1500));
-        inicioAnimal ();
+        inicioAnimales ();
         
+        /**
+         * Menú principal con las opciones disponibles
+         */
         boolean salir = false;
         do {
             /* Declaración de variables que se utilizan en los menús */
@@ -213,7 +220,7 @@ public class RETO_REFUGIO {
     }
     
     /* Método para hacer pruebas */
-    public static void inicioAnimal (){
+    public static void inicioAnimales (){
                 
         Perro p = new Perro (fecha.now(), false);
         Perro p2 = new Perro (fecha.now().minusWeeks(3), true);
