@@ -159,7 +159,7 @@ public class Animal {
         racionesDisponibles += i;
     }
     
-    public void hacerRevision (String s){
+    public void pasarRevision (String s){
         revisiones.add(s);
     }
 
