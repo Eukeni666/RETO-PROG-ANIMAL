@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class Ave extends Animal {
     private boolean vuela;
     
-    public Ave (String especie, LocalDate fechaAlta, boolean sexo, boolean vuela){
-        super (especie, fechaAlta, sexo);
+    public Ave (String especie, LocalDate fechaAlta, boolean sexo, boolean vuela, int salud, int higiene){
+        super (especie, fechaAlta, sexo, salud, higiene);
         this.vuela = vuela;
     }
     

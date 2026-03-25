@@ -13,8 +13,8 @@ public class Mamifero extends Animal {
     
     private boolean presentable;
     
-    public Mamifero (String especie, LocalDate fechaAlta, boolean sexo){
-        super (especie, fechaAlta, sexo);
+    public Mamifero (String especie, LocalDate fechaAlta, boolean sexo, int salud, int higiene){
+        super (especie, fechaAlta, sexo, salud, higiene);
         presentable = rand.nextBoolean();
     }
     

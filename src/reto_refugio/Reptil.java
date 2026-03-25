@@ -23,8 +23,8 @@ public class Reptil extends Animal {
     
     private boolean temperaturaOptima; 
     
-    public Reptil (String especie, LocalDate fechaAlta, boolean sexo){
-        super (especie, fechaAlta, sexo);
+    public Reptil (String especie, LocalDate fechaAlta, boolean sexo, int salud, int higiene){
+        super (especie, fechaAlta, sexo, salud, higiene);
     }
     
     public static int getTemperatura (){

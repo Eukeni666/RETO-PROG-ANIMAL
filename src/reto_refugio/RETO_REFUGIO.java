@@ -18,7 +18,7 @@ public class RETO_REFUGIO {
     /* Capacidad de almacenamiento de comida */
     static final int MAX_RACIONES = 1000;
     /* Comida disponible en la apertura del programa (con cierta aleatoriedad)*/
-    static int racionesDisponibles = MAX_RACIONES - (rand.nextInt(100, MAX_ANIMALES));
+    static int racionesDisponibles = MAX_RACIONES - (rand.nextInt(100, MAX_RACIONES));
     
     static ArrayList <Animal> animales = new ArrayList <>();
     static ArrayList <Adoptante> adoptantes = new ArrayList <>();
@@ -215,12 +215,12 @@ public class RETO_REFUGIO {
     /* Método para hacer pruebas */
     public static void inicioAnimal (){
                 
-        Perro p = new Perro (fecha.now(), false);
-        Perro p2 = new Perro (fecha.now().minusWeeks(3), true);
-        Mamifero m1 = new Mamifero ("gato", fecha.now(), false);
-        Mamifero m2 = new Mamifero ("hamster", fecha.now().minusDays(37), false);
-        Ave a1 = new Ave ("pelícano", fecha.now().minusMonths(3), true, true);
-        Reptil r1 = new Reptil ("iguana", fecha.now().minusYears(2), true);
+        Perro p = new Perro (fecha.now(), false, 5, 6);
+        Perro p2 = new Perro (fecha.now().minusWeeks(3), true, 3, 8);
+        Mamifero m1 = new Mamifero ("gato", fecha.now(), false, 7, 2);
+        Mamifero m2 = new Mamifero ("hamster", fecha.now().minusDays(37), false, 4, 3);
+        Ave a1 = new Ave ("pelícano", fecha.now().minusMonths(3), true, true, 5, 5);
+        Reptil r1 = new Reptil ("iguana", fecha.now().minusYears(2), true, 5, 5);
         
         System.out.println(p);
         System.out.println(p2);
@@ -262,23 +262,27 @@ public class RETO_REFUGIO {
             
             int opc = opc (5);
             boolean sexo = sexo ();
+            System.out.println("Salud (0-10): ");
+            int salud = opc (10);
+            System.out.println("Higiene (0-10): ");
+            int higiene = opc (10);
             String especie = "";
             
             switch (opc){
-                case 1: new Perro (fecha.now(), sexo);
+                case 1: new Perro (fecha.now(), sexo, salud, higiene);
                     break;
-                case 2: new Mamifero ("gato", fecha.now(), sexo);
+                case 2: new Mamifero ("gato", fecha.now(), sexo, salud, higiene);
                     break;
                 case 3:
                     especie = especie ();
-                    new Mamifero (especie, fecha.now(), sexo);
+                    new Mamifero (especie, fecha.now(), sexo, salud, higiene);
                     break;
                 case 4: especie = especie ();
                     boolean vuela = vuela ();
-                    new Ave (especie, fecha.now(), sexo, vuela);
+                    new Ave (especie, fecha.now(), sexo, vuela, salud, higiene);
                     break;
                 case 5: especie = especie ();
-                    new Reptil (especie, fecha.now(), sexo);
+                    new Reptil (especie, fecha.now(), sexo, salud, higiene);
                     break;
             }
         }
@@ -354,7 +358,7 @@ public class RETO_REFUGIO {
         for (int i = 0; i < animales.size(); i++) {
             Animal a = animales.get(i);
             System.out.print("\nID. " + a.getId() + ". " + a.getEspecie().toUpperCase()
-                    + "\t Salud: " + a.getSalud() + "\t HIGIENE: "
+                    + "\t SALUD: " + a.getSalud() + "\t HIGIENE: "
                     + a.getHigiene());
             if (a instanceof Mamifero){
                 Mamifero m = (Mamifero)a;

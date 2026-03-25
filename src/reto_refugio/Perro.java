@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class Perro extends Mamifero {
     private String tamanno; // P, M, G (pequeño, mediano, grande)
     
-    public Perro (LocalDate fechaAlta, boolean sexo) {
-        super ("perro", fechaAlta, sexo);
+    public Perro (LocalDate fechaAlta, boolean sexo, int salud, int higiene) {
+        super ("perro", fechaAlta, sexo, salud, higiene);
     }
     
     public String getTamanno (){

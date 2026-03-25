@@ -34,7 +34,7 @@ public class Animal {
     
    
     // ¿inicializar atributos con null?
-    public Animal (String especie, LocalDate fechaAlta, boolean sexo){
+    public Animal (String especie, LocalDate fechaAlta, boolean sexo, int salud, int higiene){
         id = contadorId;
         contadorId ++;
         this.especie = especie;
@@ -44,8 +44,8 @@ public class Animal {
         espacio = "";
         alimentacionTipo = "";
         alimentacionPeriodicidad = "";
-        salud = rand.nextInt(1, 11);
-        higiene = rand.nextInt(11);
+        this.salud = salud;
+        this.higiene = higiene;
         this.sexo = sexo;
         cuidador = null;
         revisiones = new ArrayList <String> ();
