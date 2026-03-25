@@ -3,6 +3,7 @@ package reto_refugio;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -12,20 +13,23 @@ public class RETO_REFUGIO {
     
     static Scanner scan = new Scanner (System.in);
     static LocalDate fecha;
+    static Random rand = new Random ();
     static final int MAX_ANIMALES = 60;
+    /* Capacidad de almacenamiento de comida */
+    static final int MAX_RACIONES = 1000;
+    /* Comida disponible en la apertura del programa (con cierta aleatoriedad)*/
+    static int racionesDisponibles = MAX_RACIONES - (rand.nextInt(100, MAX_ANIMALES));
     
-    /* Array donde se incluyen todos los animales al crearlos */
-    //static Animal [] animales = new Animal [MAX_ANIMALES];
     static ArrayList <Animal> animales = new ArrayList <>();
     static ArrayList <Adoptante> adoptantes = new ArrayList <>();
     static ArrayList <Empleado> empleados = new ArrayList <>();
     
     public static void main(String[] args) {
-        /* Método para hacer pruebas */
         
         Gerente boss = new Gerente(animales, animales, "Pepe", "Giménez", fecha.now(), 12000);
         empleados.add(boss);
         empleados.add(new Administrativo("Joaquin", "Romero", fecha.now(), 1500));
+        
         inicioAnimal ();
         
         boolean salir = false;
@@ -379,21 +383,26 @@ public class RETO_REFUGIO {
     }
 
     public static void revisarComidaDisponible() {
-        int rd = Animal.getRacionesDisponibles();
+        //int rd = Animal.getRacionesDisponibles();
+//        int rd = racionesDisponibles;
         int size = animales.size();
-        float comidas = rd / size;
+        float comidas = racionesDisponibles / size;
         System.out.println("Hay " + comidas + " comidas disponibles");
         
         if (comidas < 3){
             System.out.println("Comprar comida. Introducir cantidad: ");
             int i = scan.nextInt();
             scan.nextLine();
-            Animal.comprarComida(i);
-            rd = Animal.getRacionesDisponibles();
-            comidas = rd / size;
+            comprarComida(i);
+//            rd = Animal.getRacionesDisponibles();
+            comidas = racionesDisponibles / size;
             System.out.println("Hay " + comidas + " comidas disponibles");
         }
                 
+    }
+    
+    public static void comprarComida (int i){
+        racionesDisponibles += i;
     }
 
     public static void adopcion() {
