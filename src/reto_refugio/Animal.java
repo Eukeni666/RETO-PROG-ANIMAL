@@ -21,10 +21,6 @@ public class Animal {
     private String especie;
     private LocalDate fechaAlta;
     private LocalDate fechaBaja; // adopción o muerte
-    private String personalidad;
-    private String espacio; // ¿debería ser int? ¿cuál es su función?
-    private String alimentacionTipo;
-    private String alimentacionPeriodicidad;
     private int salud; // de 1 a 10, 0 muerte
     private int higiene; // de 0 a 10, el cuidador lo pone al valor que sea al limpiar ()
     private boolean sexo; // 0 hembra, 1 macho
@@ -32,18 +28,12 @@ public class Animal {
     private ArrayList <String> revisiones;
     private String nombre;
     
-   
-    // ¿inicializar atributos con null?
     public Animal (String especie, LocalDate fechaAlta, boolean sexo, int salud, int higiene){
         id = contadorId;
         contadorId ++;
         this.especie = especie;
         this.fechaAlta = fechaAlta;
         fechaBaja = null;
-        personalidad = "";
-        espacio = "";
-        alimentacionTipo = "";
-        alimentacionPeriodicidad = "";
         this.salud = salud;
         this.higiene = higiene;
         this.sexo = sexo;
@@ -65,18 +55,6 @@ public class Animal {
     public LocalDate getFechaBaja() {
         return fechaBaja;
     }
-    public String getPersonalidad() {
-        return personalidad;
-    }
-    public String getEspacio() {
-        return espacio;
-    }
-    public String getAlimentacionTipo() {
-        return alimentacionTipo;
-    }
-    public String getAlimentacionPeriodicidad() {
-        return alimentacionPeriodicidad;
-    }
     public int getSalud() {
         return salud;
     }
@@ -92,16 +70,12 @@ public class Animal {
     public ArrayList <String> getRevisiones() {
         return revisiones;
     }
-//    public static int getRacionesDisponibles (){
-//        return racionesDisponibles;
-//    }
     
     public String getNombre (){
         return nombre;
     }
 
     /* SETTERS */
-    // no pongo setId porque se asigna en el constructor y no es modificable
     public void setEspecie(String especie) {
         this.especie = especie;
     }
@@ -113,27 +87,19 @@ public class Animal {
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
-    public void setPersonalidad(String personalidad) {
-        this.personalidad = personalidad;
-    }
-    public void setEspacio(String espacio) {
-        this.espacio = espacio;
-    }
-    public void setAlimentacionTipo(String alimentacionTipo) {
-        this.alimentacionTipo = alimentacionTipo;
-    }
-    public void setAlimentacionPeriodicidad(String alimentacionPeriodicidad) {
-        this.alimentacionPeriodicidad = alimentacionPeriodicidad;
-    }
-    /* el método curar () llamaría a este para INCREMENTAR el valor de salud. 
-    O sea, es += en lugar de un setter real*/
+    
+    /**
+     * el método curar () llamaría a este para INCREMENTAR el valor de salud. 
+     * O sea, es += en lugar de un setter real
+    */
     public void setSalud(int salud) {
         if (this.salud < 10){
             this.salud += salud;
         }
     }
-    /* el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
-    por parámetro el valor (NO se incrementa, ES el valor)*/
+    /**
+     * el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
+     * por parámetro el valor (NO se incrementa, ES el valor)*/
     public void setHigiene(int higiene) {
         this.higiene = higiene;
     }
@@ -146,22 +112,18 @@ public class Animal {
     public void setNombre (String nombre){
         this.nombre = nombre;
     }
-    
-    /**
-     * Al comprar comida se incrementan las raciones disponibles en el valor
-     * del parámetro
-     * @param: cantidad de raciones que se compran
-     */
-//    public static void comprarComida (int i){
-//        racionesDisponibles += i;
-//    }
-    
+        
     public void hacerRevision (String s){
         revisiones.add(s);
     }
 
     /* OTROS MÉTODOS */
-    /* Comer afecta a la higiene */
+    /**
+     * Método que representa la acción de comer.
+     * Se verifica que hay comida suficiente disponible, y, si no es así, se 
+     * indica.
+     * Comer afecta negativamete a la higiene.
+     */
     public void comer() {
         boolean hay = RETO_REFUGIO.racionesDisponibles > 0;
         if (hay) {

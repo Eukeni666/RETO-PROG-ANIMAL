@@ -69,8 +69,8 @@ public class Empleado extends Persona{
                         System.out.println("(Macho)");
                     else
                         System.out.println("(Hembra)");
-                    System.out.println("Personalidad: " + animal[i].getPersonalidad());
-                    System.out.println("Alimentación: " + animal[i].getAlimentacionTipo() + " cada " + animal[i].getAlimentacionPeriodicidad());
+//                    System.out.println("Personalidad: " + animal[i].getPersonalidad());
+//                    System.out.println("Alimentación: " + animal[i].getAlimentacionTipo() + " cada " + animal[i].getAlimentacionPeriodicidad());
                 }
             }
         }

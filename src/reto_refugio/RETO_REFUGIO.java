@@ -6,20 +6,31 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author e.fresco
+ * Clase que representa un centro de acogida de animales.
+ * Tiene unas capacidades máximas en cuanto al número de animales y al almacenamiento
+ * de comida, que se revisan al dar de alta animales y al alimentarlos.
+ * El objetivo del centro es dar a los animales en adopción, para lo cual se les
+ * hacen revisiones médicas y les mantiene en condiciones higiénicas adecuadas.
+ * Cuando hay una solicitud de adopción el responsable del centro realiza una
+ * entrevista con el candidato a adoptante y se evalua su idoneidad. Si la adopción
+ * se aprueba, se realiza una última revisión del animal, se hace una ficha de
+ * adopción, se entrega al animal y el adoptante se añade al registro de adoptantes.
+ * 
+ * @author Eugenio Fresco, Javier Ortega, Pablo Alvarez
  */
 public class RETO_REFUGIO {
     
     static Scanner scan = new Scanner (System.in);
     static LocalDate fecha;
     static Random rand = new Random ();
+    /* Capacidad máxima de acogida de animales */
     static final int MAX_ANIMALES = 60;
-    /* Capacidad de almacenamiento de comida */
+    /* Capacidad máxima de almacenamiento de comida */
     static final int MAX_RACIONES = 1000;
     /* Comida disponible en la apertura del programa (con cierta aleatoriedad)*/
     static int racionesDisponibles = MAX_RACIONES - (rand.nextInt(100, MAX_RACIONES));
     
+    /* Listas de actores de la aplicación */
     static ArrayList <Animal> animales = new ArrayList <>();
     static ArrayList <Adoptante> adoptantes = new ArrayList <>();
     static ArrayList <Empleado> empleados = new ArrayList <>();
@@ -30,7 +41,8 @@ public class RETO_REFUGIO {
         empleados.add(boss);
         empleados.add(new Administrativo("Joaquin", "Romero", fecha.now(), 1500));
         
-        inicioAnimal ();
+        /* Introducción de algunos animales*/
+        inicio ();
         
         boolean salir = false;
         do {
@@ -212,8 +224,8 @@ public class RETO_REFUGIO {
                 
     }
     
-    /* Método para hacer pruebas */
-    public static void inicioAnimal (){
+    /* Método para introducir datos iniciales */
+    public static void inicio (){
                 
         Perro p = new Perro (fecha.now(), false, 5, 6);
         Perro p2 = new Perro (fecha.now().minusWeeks(3), true, 3, 8);
@@ -221,24 +233,19 @@ public class RETO_REFUGIO {
         Mamifero m2 = new Mamifero ("hamster", fecha.now().minusDays(37), false, 4, 3);
         Ave a1 = new Ave ("pelícano", fecha.now().minusMonths(3), true, true, 5, 5);
         Reptil r1 = new Reptil ("iguana", fecha.now().minusYears(2), true, 5, 5);
-        
-        System.out.println(p);
-        System.out.println(p2);
-        System.out.println(m1);
-        System.out.println(m2);
-        System.out.println(a1);
-        System.out.println(r1);
-        
-        int size = animales.size();
-        System.out.println("\n Nº de animales: " + animales.size());
-        for (int i = 0; i < size; i++) {
-            System.out.println("");
-            System.out.println("ANIMAL " + (i+1) + ":"
-                    + "\nESPECIE: " + animales.get(i).getEspecie() +
-                    "\nFECHA DE ALTA: " + animales.get(i).getFechaAlta());
-        }
+             
+//        int size = animales.size();
+//        System.out.println("\n Nº de animales: " + animales.size());
+//        for (int i = 0; i < size; i++) {
+//            System.out.println("");
+//            System.out.println("ANIMAL " + (i+1) + ":"
+//                    + "\nESPECIE: " + animales.get(i).getEspecie() +
+//                    "\nFECHA DE ALTA: " + animales.get(i).getFechaAlta());
+//        }
     }
     
+    /* Método auxiliar para elegir entre un número de opciones que se pasa por
+    parámetro */
     public static int opc (int i){
         int opc = scan.nextInt();
         scan.nextLine ();
@@ -251,8 +258,12 @@ public class RETO_REFUGIO {
         return opc;
     }
 
+    /**
+     * Dar de alta un animal.
+     * Se verifica que no se ha llegado a la capacidad máxima del centro y
+     * se introducen los datos del animal.
+     */
     public static void altaAnimal() {
-        /* Asegurarse de que no se ha llegado a la capacidad máxima del refugio */
         if (animales.size() < MAX_ANIMALES){
             System.out.println("(1) Perro"
                     + "\n(2) Gato"
@@ -288,6 +299,7 @@ public class RETO_REFUGIO {
         }
     }
 
+    /* Método auxiliar para introducir el sexo del animal */
     public static boolean sexo() {
         System.out.println("Sexo: (1) Macho (2) Hembra");
         int opc = opc (2);
@@ -298,12 +310,22 @@ public class RETO_REFUGIO {
         }
     }
 
+    /**
+     * Método auxiliar para introducir la especie.
+     * Debido a que al centro llegan más perros y gatos, estos tienen su propia 
+     * opción en el menú principal
+     */
     public static String especie() {
         System.out.println("Especie: ");
         String especie = scan.nextLine();
         return especie;
     }
 
+    /** 
+     * Método auxiliar para introducir si un ave es voladora o no 
+     * Podría servir para determinar si se la ubica en una jaula o en otro tipo
+     * de espacio.
+     */
     public static boolean vuela() {
         System.out.println("(1) Voladora (2) No voladora");
         int opc = opc (2);
@@ -314,15 +336,30 @@ public class RETO_REFUGIO {
         }
     }
 
-    /* Devuelve la id del animal. Este método se utiliza en las búsquedas para
-    identificar a los animales */
+    /**
+     * Método para introducir la id del animal. Este método se utiliza en las 
+     * búsquedas para identificar a los animales, y comprueba que el animal
+     * efectivamente existe.
+    */
     public static int getIdAnimal (){
         System.out.println("Id del animal: ");
-        int id = scan.nextInt();
+        boolean existe = false;
+        int id;
+        do {
+            id = scan.nextInt ();
+            if (id >= 0 && id < animales.size()) {
+                existe = true;
+            } 
+        } while (!existe);
         scan.nextLine();
         return id;
     }
 
+    /**
+     * Método para dar de baja un animal.
+     * Se verifica que el animal existe, aunque no es necesario, puesto que la
+     * id viene del método getIdAnimal (), que ya la valida
+     */
     public static void bajaAnimal(int id) {
         if (id <= animales.size()) {
             animales.remove(id);
@@ -331,6 +368,13 @@ public class RETO_REFUGIO {
         }
     }
 
+    /**
+     * Método que representa la revisión médica de un animal, cuya id se pasa 
+     * por parámetro.
+     * La revisión se añade al historial médico del animal a través de su método 
+     * hacerRevision.
+     * @param id 
+     */
     public static void revisionMedica(int id) {
         System.out.println("Fecha: ");
         String fecha = scan.next();
@@ -340,6 +384,11 @@ public class RETO_REFUGIO {
         animales.get(id).hacerRevision(revision);
     }
 
+    /**
+     * Método que muestra el historial de revisiones médicas de un animal que se
+     * pasa por parámetro, si es que las hay. Si no, se muestra un aviso.
+     * @param id 
+     */
     public static void mostrarHistorial(int id) {
         Animal animal = animales.get(id);
         int nRev = animal.getRevisiones().size();
@@ -354,6 +403,12 @@ public class RETO_REFUGIO {
 
     }
 
+    /**
+     * Muestra los datos y el estado de los animales, incluyendo el pelaje y el
+     * estado estético de los mamíferos, y si la temperatura está dentro del 
+     * rango aceptable para los reptiles (junto con los ajustes que serían
+     * necesarios, en su caso, si no fuera así).
+     */
     public static void estadoAnimales() {
         for (int i = 0; i < animales.size(); i++) {
             Animal a = animales.get(i);
@@ -380,15 +435,23 @@ public class RETO_REFUGIO {
         System.out.println("");
     }
 
+    /* Método para alimentar a los animales */
     public static void alimentarAnimales() {
         for (Animal a : animales){
             a.comer();
         }
     }
 
+    /**
+     * Método para consultar la comida disponible, expresada en términos del
+     * número de veces que se podría alimentar a todos los animales.
+     * Para ello se divide el número de raciones disponibles entre el número de 
+     * animales.
+     * Si quedan menos de 3 comidas, se avisa de que hay que comprar comida y se
+     * llama al método comprarComida () indicando la cantidad que se compra.
+     * Esta cantidad se añade a la cantidad total de comida disponible.
+     */
     public static void revisarComidaDisponible() {
-        //int rd = Animal.getRacionesDisponibles();
-//        int rd = racionesDisponibles;
         int size = animales.size();
         float comidas = racionesDisponibles / size;
         System.out.println("Hay " + comidas + " comidas disponibles");
@@ -401,14 +464,26 @@ public class RETO_REFUGIO {
 //            rd = Animal.getRacionesDisponibles();
             comidas = racionesDisponibles / size;
             System.out.println("Hay " + comidas + " comidas disponibles");
-        }
-                
+        }              
     }
     
+    /**
+     * Al comprar comida se incrementan las raciones disponibles en el valor
+     * del parámetro
+     * @param: cantidad de raciones que se compran
+     */
     public static void comprarComida (int i){
         racionesDisponibles += i;
     }
 
+    /**
+     * Método que representa el proceso de adopción.
+     * Se solicitan los datos del candidato y la id del animal. La solicitud
+     * se evalúa y, si es aprobada, el administrativo verifica si el adoptante
+     * ya está registrado, y si no es así, le registra como nuevo adoptante.
+     * Finalmente, se imprime una ficha de adopción y se elimina al animal de
+     * la lista de animales.
+     */
     public static void adopcion() {
         String nombre = solicitarDatos ("Nombre del solicitante: ");
         String apellidos = solicitarDatos ("Apellidos: ");
@@ -461,6 +536,7 @@ public class RETO_REFUGIO {
         }
     }
 
+    /* Método auxiliar para introducir cadenas de caracteres*/
     public static String solicitarDatos (String s) {
         String txt = "";
         System.out.println(s);
@@ -468,6 +544,9 @@ public class RETO_REFUGIO {
         return txt;
     }
     
+    /**
+     * Método booleano que representa si se aprueba o no una adopción. 
+     */
     public static boolean evaluarAdopcion (){
         int n;
         do {
@@ -483,6 +562,11 @@ public class RETO_REFUGIO {
         }
     }
 
+    /**
+     * Método que representa el proceso de limpieza de animales y espacios.
+     * El estado de higiene de los animales se pone a 10, y en el caso de los
+     * mamíferos, su atributo presentable a true
+     */
     private static void limpiar() {
         for (Animal a : animales){
             a.setHigiene(10);
@@ -492,6 +576,5 @@ public class RETO_REFUGIO {
             }
         }
     }
-    
-
+  
 }
