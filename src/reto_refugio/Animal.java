@@ -6,16 +6,14 @@ import java.util.Random;
 
 
 /**
- * 
+ * Superclase que representa a un animal del refugio
  * @author e.fresco
  */
 public class Animal {
     
     static Random rand = new Random ();
          
-    /* Sirve para inicializar el campo id, y sigue aumentando aunque haya
-    bajas de animales, de tal manera que ninguna id se repite */
-    static int contadorId = 0; // sigue aumentando aunque haya bajas
+    static int contadorId = 0;
     
     private int id;
     private String especie;
@@ -89,7 +87,7 @@ public class Animal {
     }
     
     /**
-     * el método curar () llamaría a este para INCREMENTAR el valor de salud. 
+     * el método curar() llamaría a este para INCREMENTAR el valor de salud. 
      * O sea, es += en lugar de un setter real
     */
     public void setSalud(int salud) {
@@ -98,7 +96,7 @@ public class Animal {
         }
     }
     /**
-     * el método cuidar, limpiar o equivalente de Cuidador llama a este y pasa
+     * el método cuidar(), limpiar o equivalente de Cuidador llama a este y pasa
      * por parámetro el valor (NO se incrementa, ES el valor)*/
     public void setHigiene(int higiene) {
         this.higiene = higiene;

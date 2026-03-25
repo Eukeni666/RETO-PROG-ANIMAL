@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.Random;
 
 /**
- *
+ * Superclase que representa a los mamíferos del refugio
+ * Debido a que tienen pelaje, se define un atributo booleano presentable
  * @author e.fresco
  */
 public class Mamifero extends Animal {

@@ -23,6 +23,7 @@ public class RETO_REFUGIO {
     static Scanner scan = new Scanner (System.in);
     static LocalDate fecha;
     static Random rand = new Random ();
+    
     /* Capacidad máxima de acogida de animales */
     static final int MAX_ANIMALES = 60;
     /* Capacidad máxima de almacenamiento de comida */
