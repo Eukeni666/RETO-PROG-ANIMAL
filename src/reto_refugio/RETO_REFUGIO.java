@@ -14,7 +14,9 @@ import java.util.Random;
  * Cuando hay una solicitud de adopción el responsable del centro realiza una
  * entrevista con el candidato a adoptante y se evalua su idoneidad. Si la adopción
  * se aprueba, se realiza una última revisión del animal, se hace una ficha de
- * adopción, se entrega al animal y el adoptante se añade al registro de adoptantes.
+ * adopción, se entrega al animal. Además, se actualizan las listas de adoptantes
+ * y animales, añadiendo al adoptante a la primera y eliminando al animal de la
+ * segunda. 
  * 
  * @author Eugenio Fresco, Javier Ortega, Pablo Alvarez
  */
