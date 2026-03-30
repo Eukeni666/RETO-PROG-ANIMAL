@@ -6,7 +6,8 @@ import java.util.Random;
 
 
 /**
- * Superclase que representa a un animal del refugio
+ * Superclase que representa a un animal del refugio, cualquiera que sea su
+ * especie
  * @author e.fresco
  */
 public class Animal {

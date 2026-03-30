@@ -480,10 +480,14 @@ public class RETO_REFUGIO {
     /**
      * Método que representa el proceso de adopción.
      * Se solicitan los datos del candidato y la id del animal. La solicitud
-     * se evalúa y, si es aprobada, el administrativo verifica si el adoptante
-     * ya está registrado, y si no es así, le registra como nuevo adoptante.
-     * Finalmente, se imprime una ficha de adopción y se elimina al animal de
-     * la lista de animales.
+     * se evalúa y, si es aprobada, se siguen los siguientes pasos:
+     * - el animal es lavado y, si es mamífero, puesto en un estado estético
+     * adecuado (atributo presentable)
+     * - el administrativo verifica si el adoptante ya está registrado, y, si no 
+     * es así, le registra como nuevo adoptante.
+     * - se imprime una ficha de adopción con los datos tanto del animal como
+     * del adoptante
+     * - finalmente, elimina el animal de la lista de animales del refugio.
      */
     public static void adopcion() {
         String nombre = solicitarDatos ("Nombre del solicitante: ");
